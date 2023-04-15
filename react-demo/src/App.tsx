@@ -1,11 +1,15 @@
 import React from 'react'
-import UseStateDemo from './components/useStateDemo'
+// import UseStateDemo1 from './components/useStateDemo1'
+// import UseStateDemo2 from './components/useStateDemo2'
+import List from './components/useStateList'
 import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <UseStateDemo />
+      {/* <UseStateDemo1 /> */}
+      {/* <UseStateDemo2 /> */}
+      <List />
     </div>
   )
 }
