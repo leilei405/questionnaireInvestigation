@@ -1,6 +1,7 @@
 import React from 'react'
 // import { useTitle } from 'ahooks'
 import './App.css'
+import { StyledComponentsDemo } from './components/styledComponentsDemo'
 // import { ClosureTrap } from './components/closureTrap'
 // import { useGetInfo } from './hooks/useGetInfo'
 // import { useMouse } from './hooks/useMouse'
@@ -30,6 +31,7 @@ function App() {
       {/* <span>X:{x}--------Y:{y}</span> */}
       {/* <span>{loading ? '加载中' : info}</span> */}
       {/* <ClosureTrap /> */}
+      <StyledComponentsDemo />
     </div>
   )
 }
