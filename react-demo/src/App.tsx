@@ -1,6 +1,8 @@
 import React from 'react'
+// import { useTitle } from 'ahooks'
 import './App.css'
-import { useGetInfo } from './hooks/useGetInfo'
+import { ClosureTrap } from './components/closureTrap'
+// import { useGetInfo } from './hooks/useGetInfo'
 // import { useMouse } from './hooks/useMouse'
 // import UseStateDemo1 from './components/useStateDemo1'
 // import UseStateDemo2 from './components/useStateDemo2'
@@ -13,7 +15,8 @@ import { useGetInfo } from './hooks/useGetInfo'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
-  const { loading, info } = useGetInfo()
+  // const { loading, info } = useGetInfo()
+  // useTitle('Page Title')
   return (
     <div className="App">
       <h1>App Page</h1>
@@ -24,8 +27,9 @@ function App() {
       {/* <UseRefDemo /> */}
       {/* <UseMemoDemo /> */}
       {/* <UseCallbackDemo /> */}
-      <span>{/* X:{x}--------Y:{y} */}</span>
-      <span>{loading ? '加载中' : info}</span>
+      {/* <span>X:{x}--------Y:{y}</span> */}
+      {/* <span>{loading ? '加载中' : info}</span> */}
+      <ClosureTrap />
     </div>
   )
 }
