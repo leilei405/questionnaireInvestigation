@@ -9,6 +9,7 @@ const UseStateList: FC = () => {
     { id: '4', name: '小明', isSub: false },
     { id: '5', name: '小李', isSub: true },
   ])
+
   // 增加
   const addUser = () => {
     const r = Math.random().toString().slice(-2)
@@ -20,6 +21,7 @@ const UseStateList: FC = () => {
       })
     )
   }
+
   // 删除
   const remove = (id: string) => {
     setList(
@@ -30,6 +32,7 @@ const UseStateList: FC = () => {
     )
   }
 
+  // 编辑
   const edit = (id: string) => {
     setList(
       list.map(item => {
@@ -41,6 +44,7 @@ const UseStateList: FC = () => {
       })
     )
   }
+
   return (
     <div>
       <h1>信息列表页展示</h1>
