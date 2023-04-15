@@ -4,9 +4,9 @@ export const ClosureTrap: FC = () => {
   const [count, setCount] = useState(0)
   const countRef = useRef(0)
 
-  // useEffect(() => {
-  //   countRef.current = count
-  // }, [count])
+  useEffect(() => {
+    countRef.current = count
+  }, [count])
 
   const add = () => {
     setCount(count + 1)

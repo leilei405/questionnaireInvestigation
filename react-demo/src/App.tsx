@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useTitle } from 'ahooks'
 import './App.css'
-import { ClosureTrap } from './components/closureTrap'
+// import { ClosureTrap } from './components/closureTrap'
 // import { useGetInfo } from './hooks/useGetInfo'
 // import { useMouse } from './hooks/useMouse'
 // import UseStateDemo1 from './components/useStateDemo1'
@@ -29,7 +29,7 @@ function App() {
       {/* <UseCallbackDemo /> */}
       {/* <span>X:{x}--------Y:{y}</span> */}
       {/* <span>{loading ? '加载中' : info}</span> */}
-      <ClosureTrap />
+      {/* <ClosureTrap /> */}
     </div>
   )
 }
