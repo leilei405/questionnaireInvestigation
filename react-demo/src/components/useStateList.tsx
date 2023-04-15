@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import produce from 'immer'
 import { ChildrenList } from './childrenList'
 
+// 组件是一个函数  执行返回 JSX片段, 组件初次渲染执行这个函数
+// 任何Sate 更新 都会触发组件的更新(重新执行函数)
 const UseStateList: FC = () => {
   const [list, setList] = useState([
     { id: '1', name: '张三', isSub: true },
@@ -10,6 +12,14 @@ const UseStateList: FC = () => {
     { id: '4', name: '小明', isSub: false },
     { id: '5', name: '小李', isSub: true },
   ])
+
+  // useEffect(() => {
+  //   console.log('加载http请求')
+  // }, []) // 数组里边是依赖项  根据依赖项的改变而触发, 没有依赖 组件第一次触发时更新
+
+  // useEffect(() => {
+  //   console.log('list 发生改变触发的')
+  // }, [list])
 
   // 增加
   const addUser = () => {

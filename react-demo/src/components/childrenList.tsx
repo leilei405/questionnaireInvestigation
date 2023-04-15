@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
 type ListTypeProps = {
   userId: string
@@ -10,6 +10,13 @@ type ListTypeProps = {
 
 export const ChildrenList: FC<ListTypeProps> = props => {
   const { userId, userName, isSub, remove, edit: editUser } = props
+
+  useEffect(() => {
+    console.log('----')
+    return () => {
+      console.log('销毁', userId, userName)
+    }
+  }, [])
 
   // 删除
   const del = (id: string) => {
