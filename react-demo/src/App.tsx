@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
-import { useMouse } from './hooks/useMouse'
+import { useGetInfo } from './hooks/useGetInfo'
+// import { useMouse } from './hooks/useMouse'
 // import UseStateDemo1 from './components/useStateDemo1'
 // import UseStateDemo2 from './components/useStateDemo2'
 // import List from './components/useStateList'
@@ -9,10 +10,10 @@ import { useMouse } from './hooks/useMouse'
 // import { UseMemoDemo } from './components/useMemoDemo'
 // import { UseCallbackDemo } from './components/useCallbackDemo'
 // import { useTitle } from './hooks/useTitle'
-
 function App() {
   // useTitle('我爱你')
-  const { x, y } = useMouse()
+  // const { x, y } = useMouse()
+  const { loading, info } = useGetInfo()
   return (
     <div className="App">
       <h1>App Page</h1>
@@ -23,9 +24,8 @@ function App() {
       {/* <UseRefDemo /> */}
       {/* <UseMemoDemo /> */}
       {/* <UseCallbackDemo /> */}
-      <span>
-        X:{x}--------Y:{y}
-      </span>
+      <span>{/* X:{x}--------Y:{y} */}</span>
+      <span>{loading ? '加载中' : info}</span>
     </div>
   )
 }
