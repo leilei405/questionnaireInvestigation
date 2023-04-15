@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import produce from 'immer'
 import { ChildrenList } from './childrenList'
 
 const UseStateList: FC = () => {
@@ -13,34 +14,64 @@ const UseStateList: FC = () => {
   // 增加
   const addUser = () => {
     const r = Math.random().toString().slice(-2)
+    // 未使用immer
+    // setList(
+    //   list.concat({
+    //     id: 'x' + r,
+    //     name: '未知' + r,
+    //     isSub: false,
+    //   })
+    // )
+
+    // 使用immer
     setList(
-      list.concat({
-        id: 'x' + r,
-        name: '未知' + r,
-        isSub: false,
+      produce(draft => {
+        draft.push({
+          id: 'x' + r,
+          name: '未知' + r,
+          isSub: false,
+        })
       })
     )
   }
 
   // 删除
   const remove = (id: string) => {
+    // 未使用immer
+    // setList(
+    //   list.filter(u => {
+    //     if (u.id === id) return false
+    //     else return true
+    //   })
+    // )
+
+    // 使用immer
     setList(
-      list.filter(u => {
-        if (u.id === id) return false
-        else return true
+      produce(draft => {
+        const idx = draft.findIndex(v => v.id === id)
+        draft.splice(idx, 1)
       })
     )
   }
 
   // 编辑
   const edit = (id: string) => {
+    // 未使用immer
+    // setList(
+    //   list.map(item => {
+    //     if (item.id !== id) return item
+    //     return {
+    //       ...item,
+    //       isSub: true,
+    //     }
+    //   })
+    // )
+
+    // 使用immer
     setList(
-      list.map(item => {
-        if (item.id !== id) return item
-        return {
-          ...item,
-          isSub: true,
-        }
+      produce(draft => {
+        const ids = draft.find(item => item.id === id)
+        if (ids) ids.isSub = true
       })
     )
   }
@@ -48,6 +79,7 @@ const UseStateList: FC = () => {
   return (
     <div>
       <h1>信息列表页展示</h1>
+      <button onClick={addUser}>增加</button>
       <div>
         {list.map(item => {
           const { id, name, isSub } = item
@@ -63,7 +95,6 @@ const UseStateList: FC = () => {
           )
         })}
       </div>
-      <button onClick={addUser}>增加</button>
     </div>
   )
 }
