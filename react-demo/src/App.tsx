@@ -3,7 +3,9 @@ import React from 'react'
 // import UseStateDemo2 from './components/useStateDemo2'
 // import List from './components/useStateList'
 // import { Immer } from './components/immer'
-import { UseRefDemo } from './components/useRefDemo'
+// import { UseRefDemo } from './components/useRefDemo'
+// import { UseMemoDemo } from './components/useMemoDemo'
+import { UseCallbackDemo } from './components/useCallbackDemo'
 import './App.css'
 
 function App() {
@@ -13,7 +15,9 @@ function App() {
       {/* <UseStateDemo2 /> */}
       {/* <List /> */}
       {/* <Immer /> */}
-      <UseRefDemo />
+      {/* <UseRefDemo /> */}
+      {/* <UseMemoDemo /> */}
+      <UseCallbackDemo />
     </div>
   )
 }
