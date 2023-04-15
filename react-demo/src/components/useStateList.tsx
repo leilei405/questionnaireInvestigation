@@ -12,10 +12,14 @@ const UseStateList: FC = () => {
     { id: '4', name: '小明', isSub: false },
     { id: '5', name: '小李', isSub: true },
   ])
-
-  // useEffect(() => {
-  //   console.log('加载http请求')
-  // }, []) // 数组里边是依赖项  根据依赖项的改变而触发, 没有依赖 组件第一次触发时更新
+  // 模拟组件挂载、销毁、重新挂载的完整流程，及早发现后续的问题。如果只挂载一次，有可能卸载组件时有问题。<br>
+  // 而且，实际项目中某些组件真的有可能会被挂载很多次（如重置 state），要及早模拟这种情况，避免出现重复挂载的问题（如弹窗重复、bindEvent 重复）
+  useEffect(() => {
+    console.log('加载http请求')
+    return () => {
+      console.log('销毁')
+    }
+  }, []) // 数组里边是依赖项  根据依赖项的改变而触发, 没有依赖 组件第一次触发时更新
 
   // useEffect(() => {
   //   console.log('list 发生改变触发的')
