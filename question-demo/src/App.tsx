@@ -1,8 +1,10 @@
 import React from 'react'
-function App() {
+import { List } from './pages/List'
+const App = () => {
   return (
     <div className="App">
-      <h1>问卷列表页</h1>
+      <h1 style={{ backgroundColor: 'aqua' }}>问卷列表页</h1>
+      <List />
     </div>
   )
 }
