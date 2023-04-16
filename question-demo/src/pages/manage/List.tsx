@@ -40,7 +40,7 @@ const dataList = [
   },
 ]
 const List: FC = () => {
-  useTitle('Amorous问卷 - 我的问卷')
+  useTitle('Amorous - 我的问卷')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
   // const [searchParams, setSearchParams] = useSearchParams()
