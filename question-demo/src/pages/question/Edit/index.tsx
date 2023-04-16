@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
-
-const Stat: FC = () => {
+import { useParams } from 'react-router-dom'
+const Edit: FC = () => {
+  const { id = '' } = useParams()
   return (
     <div>
-      <h1>Stat</h1>
+      <h1>Edit</h1>
+      <p>{id}</p>
     </div>
   )
 }
-export default Stat
+export default Edit

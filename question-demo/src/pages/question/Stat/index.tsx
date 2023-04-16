@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
-export const Edit: FC = () => {
+export const Stat: FC = () => {
   return (
     <div>
-      <h1>Edit</h1>
+      <h1>Stat</h1>
     </div>
   )
 }
-export default Edit
+export default Stat

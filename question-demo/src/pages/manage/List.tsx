@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import styles from './List.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
 
@@ -39,6 +40,10 @@ const dataList = [
 const List: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // console.log('keywords', searchParams.get('keyword')) // 字符串
+  // console.log('keywordsAll', searchParams.getAll('keyword')) // 数组
+
   return (
     <>
       <div className={styles.header}>
