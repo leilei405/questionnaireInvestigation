@@ -30,7 +30,7 @@ export const QuestionCard: FC<PropsType> = props => {
       </div>
       <div className={styles['button-container']}>
         <div className={styles.left}>
-          <button>编辑按钮</button>
+          <button>编辑问卷</button>
           <button>数据统计</button>
         </div>
         <div className={styles.right}>
