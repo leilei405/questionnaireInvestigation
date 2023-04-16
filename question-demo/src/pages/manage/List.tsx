@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useTitle } from 'ahooks'
 import styles from './List.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
 
@@ -38,6 +39,7 @@ const dataList = [
   },
 ]
 const List: FC = () => {
+  useTitle('Amorous问卷 - 我的问卷')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
   // const [searchParams, setSearchParams] = useSearchParams()
