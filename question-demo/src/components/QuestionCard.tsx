@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, Space, Divider, Tag } from 'antd'
+import { Button, Space, Divider, Tag, Popconfirm, message } from 'antd'
 import { useNavigate, Link } from 'react-router-dom'
 import {
   EditOutlined,
@@ -22,6 +22,12 @@ type PropsType = {
 export const QuestionCard: FC<PropsType> = props => {
   const { _id, title, createdAt, answerCount, isPublished, isStar } = props
   const nav = useNavigate()
+  const copyHandler = () => {
+    message.success('复制成功')
+  }
+  const deleteQuestion = () => {
+    message.success('删除成功')
+  }
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -70,12 +76,26 @@ export const QuestionCard: FC<PropsType> = props => {
             <Button type="text" icon={<StarOutlined />} size="small">
               {isStar ? '取消标星' : '标星'}
             </Button>
-            <Button type="text" icon={<CopyOutlined />} size="small">
-              复制
-            </Button>
-            <Button type="text" icon={<DeleteOutlined />} size="small">
-              删除
-            </Button>
+            <Popconfirm
+              title="确定复制该问卷吗?"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={copyHandler}
+            >
+              <Button type="text" icon={<CopyOutlined />} size="small">
+                复制
+              </Button>
+            </Popconfirm>
+            <Popconfirm
+              title="确定删除该问卷吗?"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={deleteQuestion}
+            >
+              <Button type="text" icon={<DeleteOutlined />} size="small">
+                删除
+              </Button>
+            </Popconfirm>
           </Space>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Typography } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
-
+const { Title } = Typography
 const dataList = [
   {
     _id: 'w1',
@@ -50,7 +51,7 @@ const List: FC = () => {
     <>
       <div className={styles.header}>
         <div className={styles.left}>
-          <h1>我的问卷</h1>
+          <Title level={3}>我的问卷</Title>
         </div>
         <div className={styles.right}>搜索</div>
       </div>

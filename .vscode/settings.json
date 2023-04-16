@@ -3,6 +3,7 @@
         "ahooks",
         "antd",
         "commitlint",
-        "immer"
+        "immer",
+        "Popconfirm"
     ]
 }
