@@ -1,12 +1,8 @@
 import React from 'react'
-import { List } from './pages/List'
+import { RouterProvider } from 'react-router-dom'
+import routerConfig from './router'
 const App = () => {
-  return (
-    <div className="App">
-      <h1 style={{ backgroundColor: 'aqua' }}>问卷列表页</h1>
-      <List />
-    </div>
-  )
+  return <RouterProvider router={routerConfig}></RouterProvider>
 }
 
 export default App

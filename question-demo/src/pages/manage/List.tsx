@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import styles from './List.module.scss'
-import { QuestionCard } from '../components/QuestionCard'
+import { QuestionCard } from '../../components/QuestionCard'
 
 const dataList = [
   {
@@ -36,7 +36,7 @@ const dataList = [
     createdAt: '4月18日 20:56',
   },
 ]
-export const List: FC = () => {
+const List: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
   return (
@@ -53,7 +53,8 @@ export const List: FC = () => {
           return <QuestionCard key={_id} {...question} />
         })}
       </div>
-      <div className={styles.footer}>footer 分页</div>
+      <div className={styles.footer}>listStyle Footer 分页</div>
     </>
   )
 }
+export default List
