@@ -62,7 +62,7 @@ const List: FC = () => {
             return <QuestionCard key={_id} {...question} />
           })}
       </div>
-      <div className={styles.footer}>listStyle Footer 分页</div>
+      <div className={styles.footer}>加载更多</div>
     </>
   )
 }
