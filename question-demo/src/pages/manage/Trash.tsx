@@ -3,6 +3,7 @@ import { Table, Empty, Typography, Tag } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
+import ListSearch from '../../components/ListSearch'
 const { Title } = Typography
 const dataList = [
   {
@@ -65,7 +66,9 @@ const Trash: FC = () => {
         <div className={styles.left}>
           <Title level={3}>回收站</Title>
         </div>
-        <div className={styles.right}>搜索</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       {/* Table */}
       <div className={styles.content}>

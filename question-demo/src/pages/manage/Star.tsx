@@ -3,6 +3,7 @@ import { Empty, Typography } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
+import ListSearch from '../../components/ListSearch'
 const { Title } = Typography
 const dataList = [
   {
@@ -39,7 +40,9 @@ const Star: FC = () => {
         <div className={styles.left}>
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className={styles.right}>搜索</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {questionList.length === 0 && <Empty description="没有数据" />}
