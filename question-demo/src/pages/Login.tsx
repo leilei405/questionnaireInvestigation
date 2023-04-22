@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, Space, Typography } from 'antd'
-import { UserAddOutlined } from '@ant-design/icons'
+import { Button, Card, Checkbox, Form, Input, Space, Typography } from 'antd'
+import { UserSwitchOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
 import { REGISTER_PATHNAME } from '../router'
 import { rememberUser, deleteUserForm, getUserInfoFormStorage } from '../utils/rememberInfo'
@@ -24,7 +24,6 @@ export const Login: FC = () => {
       deleteUserForm()
     }
   }
-
   useEffect(() => {
     const { username, password } = getUserInfoFormStorage()
     form.setFieldsValue({ username, password })
@@ -35,18 +34,18 @@ export const Login: FC = () => {
       <div>
         <Space>
           <Title level={2}>
-            <UserAddOutlined />
+            <UserSwitchOutlined />
           </Title>
           <Title level={2}>用户登录</Title>
         </Space>
       </div>
-      <div>
+      <Card className={styles.card}>
         <Form
           form={form}
           onFinish={onFinish}
           initialValues={{ remember: true }}
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          labelCol={{ span: 4 }}
+          // wrapperCol={{ span: 16 }}
         >
           <Form.Item
             label="用户名"
@@ -66,19 +65,19 @@ export const Login: FC = () => {
           >
             <Input.Password placeholder="请输入密码" />
           </Form.Item>
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 24 }}>
+          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 4 }}>
             <Checkbox>记住密码</Checkbox>
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 24 }}>
+          <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
               <Button type="primary" htmlType="submit">
                 登录
               </Button>
-              <Link to={REGISTER_PATHNAME}>没有账户,去注册</Link>
+              <Link to={REGISTER_PATHNAME}>还没有账户,去注册</Link>
             </Space>
           </Form.Item>
         </Form>
-      </div>
+      </Card>
     </div>
   )
 }

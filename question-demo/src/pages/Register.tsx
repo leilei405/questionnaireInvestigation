@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { Button, Form, Input, Space, Typography } from 'antd'
-import { UserAddOutlined } from '@ant-design/icons'
+import { Button, Card, Form, Input, Space, Typography } from 'antd'
+import { UserSwitchOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
 import { LOGIN_PATHNAME } from '../router'
@@ -22,13 +22,13 @@ const Register: FC = () => {
       <div>
         <Space>
           <Title level={2}>
-            <UserAddOutlined />
+            <UserSwitchOutlined />
           </Title>
-          <Title level={2}>注册</Title>
+          <Title level={2}>用户注册</Title>
         </Space>
       </div>
-      <div>
-        <Form onFinish={onFinish} labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+      <Card className={styles.card}>
+        <Form onFinish={onFinish} labelCol={{ span: 4 }}>
           <Form.Item
             label="用户名"
             name="username"
@@ -73,16 +73,16 @@ const Register: FC = () => {
           >
             <Input placeholder="请输入昵称" />
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
               <Button type="primary" htmlType="submit">
                 注册
               </Button>
-              <Link to={LOGIN_PATHNAME}>已有账户,登录</Link>
+              <Link to={LOGIN_PATHNAME}>已有账户,去登录</Link>
             </Space>
           </Form.Item>
         </Form>
-      </div>
+      </Card>
     </div>
   )
 }

@@ -5,4 +5,19 @@
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 600px;
+        height: 400px;
+        gap: 20px;
+        border-radius: 29px;
+        backdrop-filter: blur(3px);
+        background-color: rgba(21,193,150, 0.212);
+        box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+        border: 2px rgba(255,255,255,0.4) solid;
+        border-bottom: 2px rgba(40,40,40,0.35) solid;
+        border-right: 2px rgba(40,40,40,0.35) solid;
+    }
 }
