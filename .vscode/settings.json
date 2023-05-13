@@ -3,6 +3,8 @@
         "ahooks",
         "antd",
         "commitlint",
+        "craco",
+        "ctitle",
         "immer",
         "mockjs",
         "Popconfirm"

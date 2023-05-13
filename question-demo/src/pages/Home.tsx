@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react'
 import styles from './Home.module.scss'
 import { Button, Typography } from 'antd'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 const { Title, Paragraph } = Typography
 // import '../_mock/index'
-// import axios from 'axios'
+import axios from 'axios'
 const Home: FC = () => {
   const nav = useNavigate()
 
@@ -30,6 +30,16 @@ const Home: FC = () => {
     // http://localhost:3000  前端
     // 跨域 mock
     // create-react-app webpack devServer 代理
+    // fetch('/api/question/100')
+    //   .then(res => {
+    //     res.json()
+    //   })
+    //   .then(data => {
+    //     console.log(data)
+    //   })
+    axios.get('/api/test').then(res => {
+      console.log(res.data)
+    })
   }, [])
   return (
     <div className={styles.container}>
