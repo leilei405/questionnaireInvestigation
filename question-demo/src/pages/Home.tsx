@@ -24,6 +24,13 @@ const Home: FC = () => {
   //     console.log(data)
   //   })
   // }, [])
+
+  useEffect(() => {
+    // http://localhost:3001/api/question   服务端
+    // http://localhost:3000  前端
+    // 跨域 mock
+    // create-react-app webpack devServer 代理
+  }, [])
   return (
     <div className={styles.container}>
       <div className={styles.info}>
