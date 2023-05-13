@@ -2,15 +2,16 @@ const Mock = require('mockjs')
 
 const Random = Mock.Random
 
-module.export = [
+module.exports = [
     {
-        url: '/api/test',
+        url: '/api/question/:id',
         method: 'get',
         response() {
             return {
                 errno: 0,
                 data: {
-                    name: Random.cname(),
+                    name: Random.id(),
+                    title: Random.ctitle()
                 }
             }
         }
