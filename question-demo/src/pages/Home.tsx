@@ -1,11 +1,29 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import styles from './Home.module.scss'
 import { Button, Typography } from 'antd'
 import { useNavigate, Link } from 'react-router-dom'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 const { Title, Paragraph } = Typography
+// import '../_mock/index'
+// import axios from 'axios'
 const Home: FC = () => {
   const nav = useNavigate()
+
+  // react18 开发环境会执行俩次
+  // useEffect(() => {
+  // mock.js 只能劫持 XMLHttpRequest, 不能劫持fetch
+  // axios 内部使用 XMLHttpRequest API, 没用fetch
+  // axios.get('/api/test').then(res => {
+  //   console.log(res.data)
+  // })
+  // fetch('/api/test')
+  //   .then(res => {
+  //     res.json()
+  //   })
+  //   .then(data => {
+  //     console.log(data)
+  //   })
+  // }, [])
   return (
     <div className={styles.container}>
       <div className={styles.info}>

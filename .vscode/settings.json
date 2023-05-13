@@ -4,6 +4,7 @@
         "antd",
         "commitlint",
         "immer",
+        "mockjs",
         "Popconfirm"
     ]
 }
