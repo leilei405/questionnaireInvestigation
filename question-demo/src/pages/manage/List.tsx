@@ -1,52 +1,36 @@
-import React, { FC, useState } from 'react'
-import { Typography } from 'antd'
-import { useTitle } from 'ahooks'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { FC, useEffect, useState } from 'react'
+import { useRequest, useTitle } from 'ahooks'
+import { Typography, Spin } from 'antd'
 import styles from './common.module.scss'
-import { QuestionCard } from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
+import { QuestionCard } from '../../components/QuestionCard'
+import { queryQuestionListServices } from '../../services/question'
 const { Title } = Typography
-const dataList = [
-  {
-    _id: 'w1',
-    title: '问卷1',
-    isPublished: true,
-    isStar: false,
-    answerCount: 5,
-    createdAt: '4月15日 23:56',
-  },
-  {
-    _id: 'w2',
-    title: '问卷2',
-    isPublished: false,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '4月16日 22:56',
-  },
-  {
-    _id: 'w3',
-    title: '问卷3',
-    isPublished: true,
-    isStar: false,
-    answerCount: 7,
-    createdAt: '4月17日 21:56',
-  },
-  {
-    _id: 'w4',
-    title: '问卷4',
-    isPublished: false,
-    isStar: true,
-    answerCount: 1,
-    createdAt: '4月18日 20:56',
-  },
-]
+
 const List: FC = () => {
   useTitle('Amorous - 我的问卷')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [questionList, setQuestionList] = useState(dataList)
   // const [searchParams, setSearchParams] = useSearchParams()
   // console.log('keywords', searchParams.get('keyword')) // 字符串
   // console.log('keywordsAll', searchParams.getAll('keyword')) // 数组
 
+  // 获取列表数据 普通版 Ajax
+  // const [questionList, setQuestionList] = useState([])
+  // const [total, setTotal] = useState(0)
+  // const queryQuestionList = async () => {
+  //   const data = await queryQuestionListServices()
+  //   const { list = [], total = 0 } = data
+  //   setQuestionList(list)
+  //   setTotal(total)
+  // }
+
+  // 获取列表数据 useRequest版
+  const { data = {}, loading } = useRequest(queryQuestionListServices)
+  const { list = [], total = 0 } = data
+  // useEffect(() => {
+  //   queryQuestionList()
+  // }, [])
   return (
     <>
       <div className={styles.header}>
@@ -58,8 +42,14 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {questionList.length > 0 &&
-          questionList.map(question => {
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading &&
+          list.length > 0 &&
+          list.map((question: any) => {
             const { _id } = question
             return <QuestionCard key={_id} {...question} />
           })}
