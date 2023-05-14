@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Table, Empty, Typography, Tag } from 'antd'
+import { Table, Empty, Typography, Tag, Button, Space } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 // import { QuestionCard } from '../../components/QuestionCard'
@@ -59,7 +59,42 @@ const columns = [
 const Trash: FC = () => {
   useTitle('Amorous - 回收站')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [questionList, setQuestionList] = useState(dataList)
+  const [loading, setLoading] = useState(false)
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys)
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  }
+
+  // 恢复
+  const restore = () => {
+    console.log('恢复')
+    setLoading(true)
+    setTimeout(() => {
+      setSelectedRowKeys([])
+      setLoading(false)
+    }, 1000)
+  }
+
+  // 彻底删除
+  const deleteTrash = () => {
+    console.log('彻底删除')
+    setLoading(true)
+    setTimeout(() => {
+      setSelectedRowKeys([])
+      setLoading(false)
+    }, 1000)
+  }
+
+  const hasSelected = selectedRowKeys.length > 0
+
   return (
     <div>
       {/* header */}
@@ -71,11 +106,27 @@ const Trash: FC = () => {
           <ListSearch />
         </div>
       </div>
+      <div className={styles.delOrResBtn}>
+        <Space>
+          <Button type="primary" onClick={restore} disabled={!hasSelected} loading={loading}>
+            恢复
+          </Button>
+          <Button type="primary" onClick={deleteTrash} disabled={!hasSelected} loading={loading}>
+            彻底删除
+          </Button>
+        </Space>
+      </div>
       {/* Table */}
       <div className={styles.content}>
         {questionList.length === 0 && <Empty description="没有数据" />}
         {questionList.length > 0 && (
-          <Table pagination={false} columns={columns} dataSource={dataList} rowKey="_id" />
+          <Table
+            rowSelection={rowSelection}
+            pagination={false}
+            columns={columns}
+            dataSource={dataList}
+            rowKey="_id"
+          />
         )}
       </div>
     </div>
