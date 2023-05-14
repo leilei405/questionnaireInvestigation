@@ -6,6 +6,7 @@ import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 import { QuestionCard } from '../../components/QuestionCard'
 import { queryQuestionListServices } from '../../services/question'
+import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 const { Title } = Typography
 
 const List: FC = () => {
@@ -26,7 +27,10 @@ const List: FC = () => {
   // }
 
   // 获取列表数据 useRequest版
-  const { data = {}, loading } = useRequest(queryQuestionListServices)
+  // const { data = {}, loading } = useRequest(queryQuestionListServices)
+
+  // 自定义hook 版本
+  const { data = {}, loading } = useLoadQuestionList()
   const { list = [], total = 0 } = data
   // useEffect(() => {
   //   queryQuestionList()
