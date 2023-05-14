@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useEffect, useState } from 'react'
-import { useRequest, useTitle } from 'ahooks'
+import React, { FC } from 'react'
+import { useTitle } from 'ahooks'
 import { Typography, Spin } from 'antd'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 import { QuestionCard } from '../../components/QuestionCard'
-import { queryQuestionListServices } from '../../services/question'
+// import { queryQuestionListServices } from '../../services/question'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 const { Title } = Typography
 

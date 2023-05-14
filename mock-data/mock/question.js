@@ -34,11 +34,18 @@ module.exports = [
     {
         url: '/api/question',
         method: 'get',
-        response() {
+        response(ctx) {
+            console.log('ctx', ctx.url);
+            // ctx /api/question?keyword=&isDeleted=true
+            // ctx /api/question?keyword=&isDeleted=true
+            const { url = '' } = ctx
+            const isDeleted = url.indexOf('isDeleted=true') >= 0
+            const isStar = url.indexOf('isStar=true') >= 0
+
             return {
                 errno: 0,
                 data: {
-                    list: getList(),
+                    list: getList({isDeleted, isStar}),
                     total: 100,
                 }
             }

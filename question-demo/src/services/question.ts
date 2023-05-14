@@ -4,6 +4,8 @@ import type { ResDataType } from './http'
 // 定义查询参数类型
 type SearchOption = {
   keyword: string
+  isStar: boolean
+  isDeleted: boolean
   // page: number
   // pageSize: number
 }

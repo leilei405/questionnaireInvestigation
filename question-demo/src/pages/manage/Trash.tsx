@@ -1,36 +1,12 @@
 import React, { FC, useState } from 'react'
-import { Table, Empty, Typography, Tag, Button, Space } from 'antd'
+import { Table, Empty, Typography, Tag, Button, Space, Spin } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
-// import { QuestionCard } from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
+// import { QuestionCard } from '../../components/QuestionCard'
+import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 const { Title } = Typography
-const dataList = [
-  {
-    _id: 'w1',
-    title: '问卷1',
-    isPublished: true,
-    isStar: true,
-    answerCount: 5,
-    createdAt: '4月15日 23:56',
-  },
-  {
-    _id: 'w2',
-    title: '问卷2',
-    isPublished: true,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '4月16日 22:56',
-  },
-  {
-    _id: 'w3',
-    title: '问卷3',
-    isPublished: true,
-    isStar: true,
-    answerCount: 7,
-    createdAt: '4月17日 21:56',
-  },
-]
+
 const columns = [
   {
     title: 'ID',
@@ -60,8 +36,10 @@ const Trash: FC = () => {
   useTitle('Amorous - 回收站')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-  const [questionList, setQuestionList] = useState(dataList)
-  const [loading, setLoading] = useState(false)
+  // const [questionList, setQuestionList] = useState(dataList)
+  // const [loading, setLoading] = useState(false)
+  const { data = {}, loading } = useLoadQuestionList({ isDeleted: true })
+  const { list = [], total = 0 } = data
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys)
@@ -76,20 +54,20 @@ const Trash: FC = () => {
   // 恢复
   const restore = () => {
     console.log('恢复')
-    setLoading(true)
+    // setLoading(true)
     setTimeout(() => {
       setSelectedRowKeys([])
-      setLoading(false)
+      // setLoading(false)
     }, 1000)
   }
 
   // 彻底删除
   const deleteTrash = () => {
     console.log('彻底删除')
-    setLoading(true)
+    // setLoading(true)
     setTimeout(() => {
       setSelectedRowKeys([])
-      setLoading(false)
+      // setLoading(false)
     }, 1000)
   }
 
@@ -118,13 +96,18 @@ const Trash: FC = () => {
       </div>
       {/* Table */}
       <div className={styles.content}>
-        {questionList.length === 0 && <Empty description="没有数据" />}
-        {questionList.length > 0 && (
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading && list.length === 0 && <Empty description="没有数据" />}
+        {!loading && list.length > 0 && (
           <Table
             rowSelection={rowSelection}
             pagination={false}
             columns={columns}
-            dataSource={dataList}
+            dataSource={list}
             rowKey="_id"
           />
         )}
