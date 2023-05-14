@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Table, Empty, Typography, Tag } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
-import { QuestionCard } from '../../components/QuestionCard'
+// import { QuestionCard } from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
 const { Title } = Typography
 const dataList = [
@@ -58,6 +58,7 @@ const columns = [
 ]
 const Trash: FC = () => {
   useTitle('Amorous - 回收站')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
   return (
     <div>

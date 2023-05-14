@@ -33,6 +33,7 @@ const dataList = [
 ]
 const Star: FC = () => {
   useTitle('Amorous - 星标问卷')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [questionList, setQuestionList] = useState(dataList)
   return (
     <div>

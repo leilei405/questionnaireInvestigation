@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { Typography } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'

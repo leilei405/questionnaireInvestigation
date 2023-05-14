@@ -1,27 +1,42 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Space, Divider, message } from 'antd'
+import { useRequest } from 'ahooks'
 import { BarsOutlined, PlusOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
 import { createQuestionServices } from '../services/question'
 import styles from './ManageLayout.module.scss'
 const ManageLayout: FC = () => {
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const nav = useNavigate()
   const { pathname } = useLocation()
 
-  // 创建问卷
-  const createQuestion = async () => {
-    setLoading(true)
-    const data = await createQuestionServices()
-    const { id } = data || {}
-    console.log(id)
+  // 创建问卷 Ajax 方式
+  // const createQuestion = async () => {
+  //   setLoading(true)
+  //   const data = await createQuestionServices()
+  //   const { id } = data || {}
+  //   console.log(id)
 
-    if (id) {
-      nav(`/question/edit/${id}`) // 跳转到新建问卷的编辑页
+  //   if (id) {
+  //     nav(`/question/edit/${id}`) // 跳转到新建问卷的编辑页
+  //     message.success('创建成功')
+  //   }
+  //   setLoading(false)
+  // }
+
+  // 使用useRequest重构
+  const {
+    loading,
+    // error,
+    run: createQuestion,
+  } = useRequest(createQuestionServices, {
+    manual: true, // 手动触发
+    onSuccess(res) {
+      // 成功之后的回调  onSuccess
+      nav(`/question/edit/${res.id}`) // 跳转到新建问卷的编辑页
       message.success('创建成功')
-    }
-    setLoading(false)
-  }
+    },
+  })
 
   return (
     <div className={styles.container}>
