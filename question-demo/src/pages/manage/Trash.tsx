@@ -5,6 +5,7 @@ import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 // import { QuestionCard } from '../../components/QuestionCard'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
+import { ListPage } from '../../components/ListPage'
 const { Title } = Typography
 
 const columns = [
@@ -111,6 +112,9 @@ const Trash: FC = () => {
             rowKey="_id"
           />
         )}
+      </div>
+      <div className={styles.footer}>
+        <ListPage total={total} />
       </div>
     </div>
   )

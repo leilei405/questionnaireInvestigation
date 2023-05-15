@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Empty, Spin, Typography } from 'antd'
 import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
+import { ListPage } from '../../components/ListPage'
 const { Title } = Typography
 
 const Star: FC = () => {
@@ -38,7 +39,9 @@ const Star: FC = () => {
             return <QuestionCard key={_id} {...question} />
           })}
       </div>
-      {!list.length && <div className={styles.footer}>分页</div>}
+      <div className={styles.footer}>
+        <ListPage total={total} />
+      </div>
     </div>
   )
 }
