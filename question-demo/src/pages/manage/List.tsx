@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useEffect, useState, useRef } from 'react'
-import { useTitle, useDebounceFn } from 'ahooks'
+import { useTitle, useDebounceFn, useRequest } from 'ahooks'
 import { Typography, Spin } from 'antd'
 import { useSearchParams } from 'react-router-dom'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 import { QuestionCard } from '../../components/QuestionCard'
-// import { queryQuestionListServices } from '../../services/question'
+import { queryQuestionListServices } from '../../services/question'
+import { LIST_PAGE_SIZE, LIST_SEARCH_PARAM_KEY } from '../../constant'
 // import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 const { Title } = Typography
 
@@ -53,7 +54,30 @@ const List: FC = () => {
   //   console.log('LoadMore')
   // }
 
+  // 真正加载的数据
+  const { run: loadData, loading } = useRequest(
+    async () => {
+      const data = await queryQuestionListServices({
+        page,
+        pageSize: LIST_PAGE_SIZE,
+        keyword: searchParams.get(LIST_SEARCH_PARAM_KEY) || '',
+      })
+      return data
+    },
+    {
+      manual: true,
+      onSuccess: result => {
+        const { total = 0, list: listData = [] } = result
+        setList(list.concat(listData)) // 累计
+        setTotal(total)
+        setPage(page + 1)
+        // console.log(result, '---result---')
+      },
+    }
+  )
+
   // 防抖 使用ahooks中的内置hooks useDebounceFn
+  // 尝试去触发加载数据
   const { run: tryLoadMore } = useDebounceFn(
     () => {
       const elem = containerRef.current
@@ -62,7 +86,8 @@ const List: FC = () => {
       if (domRect == null) return
       const { bottom } = domRect
       if (bottom <= document.body.clientHeight) {
-        console.log('111')
+        loadData() // 真正加载数据
+        // console.log('111')
       }
     },
     {
@@ -77,14 +102,14 @@ const List: FC = () => {
 
   // 页面滑动的时候加载
   useEffect(() => {
-    if (!haveMoreData) {
+    if (haveMoreData) {
       window.addEventListener('scroll', tryLoadMore)
     }
     return () => {
       // searchParams 变化之前解绑事件
       window.removeEventListener('scroll', tryLoadMore) // 解绑事件
     }
-  }, [searchParams])
+  }, [searchParams, haveMoreData])
 
   return (
     <>
@@ -97,13 +122,14 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {/* {
+        {/* <div style={{ height: '2000px' }}></div> */}
+        {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
           </div>
-        } */}
-        <div style={{ height: '2000px' }}></div>
-        {list.length > 0 &&
+        )}
+        {!loading &&
+          list.length > 0 &&
           list.map((question: any) => {
             const { _id } = question
             return <QuestionCard key={_id} {...question} />
