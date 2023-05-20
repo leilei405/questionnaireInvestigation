@@ -51,5 +51,15 @@ module.exports = [
                 }
             }
         }
+    },
+    // 更新问卷 标星
+    {
+        url: '/api/question/:id',
+        method: 'patch',
+        response() {
+            return {
+                errno: 0
+            }
+        }
     }
 ]

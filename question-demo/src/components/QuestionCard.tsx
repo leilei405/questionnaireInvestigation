@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Button, Space, Divider, Tag, Popconfirm, message } from 'antd'
 import { useNavigate, Link } from 'react-router-dom'
 import {
@@ -8,6 +8,8 @@ import {
   CopyOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
+import { useRequest } from 'ahooks'
+import { updateQuestionServices } from '../services/question'
 import styles from './QuestionCard.module.scss'
 
 type PropsType = {
@@ -21,6 +23,8 @@ type PropsType = {
 
 export const QuestionCard: FC<PropsType> = props => {
   const { _id, title, createdAt, answerCount, isPublished, isStar } = props
+  const [isStarted, setIsStarted] = useState(isStar)
+
   const nav = useNavigate()
   const copyHandler = () => {
     message.success('复制成功')
@@ -28,13 +32,29 @@ export const QuestionCard: FC<PropsType> = props => {
   const deleteQuestion = () => {
     message.success('删除成功')
   }
+
+  // 点击修改标星
+  const { run: updateQuestionIsStart, loading: changeStartLoading } = useRequest(
+    async () => {
+      const data = await updateQuestionServices(_id, { isStar: !isStarted })
+      return data
+    },
+    {
+      manual: true, // 手动模式
+      onSuccess: () => {
+        setIsStarted(!isStarted) // 更新完成
+        if (!isStarted) return message.success('标星成功')
+        return message.warning('取消标星')
+      },
+    }
+  )
   return (
     <div className={styles.container}>
       <div className={styles.title}>
         <div className={styles.left}>
           <Link to={isPublished ? `/question/stat/${_id}` : `/question/edit/${_id}`}>
             <Space>
-              {isStar && <StarOutlined style={{ color: 'red' }} />}
+              {isStarted && <StarOutlined style={{ color: 'red' }} />}
               {title}
             </Space>
           </Link>
@@ -73,8 +93,14 @@ export const QuestionCard: FC<PropsType> = props => {
         </div>
         <div className={styles.right}>
           <Space>
-            <Button type="text" icon={<StarOutlined />} size="small">
-              {isStar ? '取消标星' : '标星'}
+            <Button
+              type="text"
+              icon={<StarOutlined style={isStarted ? { color: 'yellowgreen' } : {}} />}
+              size="small"
+              onClick={updateQuestionIsStart}
+              disabled={changeStartLoading}
+            >
+              {isStarted ? '取消标星' : '标星'}
             </Button>
             <Popconfirm
               title="确定复制该问卷吗?"

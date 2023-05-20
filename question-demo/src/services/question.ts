@@ -34,3 +34,13 @@ export const queryQuestionListServices = async (
   })) as ResDataType
   return data
 }
+
+// 更新标星问卷
+export const updateQuestionServices = async (
+  id: string,
+  option: { [key: string]: any }
+): Promise<ResDataType> => {
+  const url = `/api/question/${id}`
+  const data = (await http.patch(url, option)) as ResDataType
+  return data
+}
