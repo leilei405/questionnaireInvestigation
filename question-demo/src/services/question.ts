@@ -44,3 +44,10 @@ export const updateQuestionServices = async (
   const data = (await http.patch(url, option)) as ResDataType
   return data
 }
+
+// 复制问卷
+export const copyQuestionServices = async (id: string): Promise<ResDataType> => {
+  const url = `/api/question/duplicate/${id}`
+  const data = (await http.post(url)) as ResDataType
+  return data
+}

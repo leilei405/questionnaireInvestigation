@@ -9,7 +9,7 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
-import { updateQuestionServices } from '../services/question'
+import { copyQuestionServices, updateQuestionServices } from '../services/question'
 import styles from './QuestionCard.module.scss'
 
 type PropsType = {
@@ -26,9 +26,20 @@ export const QuestionCard: FC<PropsType> = props => {
   const [isStarted, setIsStarted] = useState(isStar)
 
   const nav = useNavigate()
-  const copyHandler = () => {
-    message.success('复制成功')
-  }
+  const { run: copyHandler, loading: copyLoading } = useRequest(
+    async () => await copyQuestionServices(_id),
+    {
+      manual: true,
+      onSuccess: res => {
+        message.success('复制成功')
+        // 跳转到问卷编辑页
+        nav(`/question/edit/${res.id}`)
+      },
+    }
+  )
+  // => {
+  //   message.success('复制成功')
+  // }
   const deleteQuestion = () => {
     message.success('删除成功')
   }
@@ -48,6 +59,7 @@ export const QuestionCard: FC<PropsType> = props => {
       },
     }
   )
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -108,7 +120,7 @@ export const QuestionCard: FC<PropsType> = props => {
               cancelText="取消"
               onConfirm={copyHandler}
             >
-              <Button type="text" icon={<CopyOutlined />} size="small">
+              <Button type="text" icon={<CopyOutlined />} disabled={copyLoading} size="small">
                 复制
               </Button>
             </Popconfirm>
