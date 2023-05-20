@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, useMemo } from 'react'
 import { useTitle, useDebounceFn, useRequest } from 'ahooks'
-import { Typography, Spin } from 'antd'
+import { Typography, Spin, Empty } from 'antd'
 import { useSearchParams } from 'react-router-dom'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
@@ -39,6 +39,7 @@ const List: FC = () => {
   // }, [])
 
   // 下滑加载更多
+  const [started, setStarted] = useState(false) // 是否已经开始加载(防抖,有延迟时间)
   const [page, setPage] = useState(1) // List 内部的数据 不在URl 参数中体现
   const [list, setList] = useState([]) // 全部的列表数据,上划加载更多,累计
   const [total, setTotal] = useState(0)
@@ -54,13 +55,22 @@ const List: FC = () => {
   //   console.log('LoadMore')
   // }
 
+  // 监听keyword  重置信息
+  const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
+  useEffect(() => {
+    setStarted(false)
+    setPage(1)
+    setList([])
+    setTotal(0)
+  }, [keyword])
+
   // 真正加载的数据
   const { run: loadData, loading } = useRequest(
     async () => {
       const data = await queryQuestionListServices({
         page,
         pageSize: LIST_PAGE_SIZE,
-        keyword: searchParams.get(LIST_SEARCH_PARAM_KEY) || '',
+        keyword,
       })
       return data
     },
@@ -71,7 +81,6 @@ const List: FC = () => {
         setList(list.concat(listData)) // 累计
         setTotal(total)
         setPage(page + 1)
-        // console.log(result, '---result---')
       },
     }
   )
@@ -87,7 +96,7 @@ const List: FC = () => {
       const { bottom } = domRect
       if (bottom <= document.body.clientHeight) {
         loadData() // 真正加载数据
-        // console.log('111')
+        setStarted(true)
       }
     },
     {
@@ -111,6 +120,14 @@ const List: FC = () => {
     }
   }, [searchParams, haveMoreData])
 
+  // 使用useMemo缓存
+  const LoadMoreContentElem = useMemo(() => {
+    if (!started || loading) return <Spin />
+    if (total === 0) return <Empty description="暂无数据" />
+    if (!haveMoreData) return <span>....没有更多了</span>
+    return <span>开始加载下一页</span>
+  }, [started, loading, haveMoreData])
+
   return (
     <>
       <div className={styles.header}>
@@ -123,20 +140,22 @@ const List: FC = () => {
       </div>
       <div className={styles.content}>
         {/* <div style={{ height: '2000px' }}></div> */}
-        {loading && (
+        {/* {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
           </div>
-        )}
-        {!loading &&
-          list.length > 0 &&
+        )} */}
+        {list.length > 0 &&
           list.map((question: any) => {
             const { _id } = question
             return <QuestionCard key={_id} {...question} />
           })}
       </div>
       <div className={styles.footer}>
-        <div ref={containerRef}>....加载更多</div>
+        <div ref={containerRef}>
+          {/* <LoadMoreContentElem /> */}
+          {LoadMoreContentElem}
+        </div>
       </div>
     </>
   )
