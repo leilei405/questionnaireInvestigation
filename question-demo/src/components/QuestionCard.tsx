@@ -7,6 +7,7 @@ import {
   StarOutlined,
   CopyOutlined,
   DeleteOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
 import { copyQuestionServices, updateQuestionServices } from '../services/question'
@@ -23,9 +24,12 @@ type PropsType = {
 
 export const QuestionCard: FC<PropsType> = props => {
   const { _id, title, createdAt, answerCount, isPublished, isStar } = props
+
   const [isStarted, setIsStarted] = useState(isStar)
 
   const nav = useNavigate()
+
+  // 复制问卷
   const { run: copyHandler, loading: copyLoading } = useRequest(
     async () => await copyQuestionServices(_id),
     {
@@ -37,12 +41,19 @@ export const QuestionCard: FC<PropsType> = props => {
       },
     }
   )
-  // => {
-  //   message.success('复制成功')
-  // }
-  const deleteQuestion = () => {
-    message.success('删除成功')
-  }
+
+  // 删除问卷
+  const [isDeletedState, setDeletedState] = useState(false)
+  const { run: deleteQuestion, loading: delLoading } = useRequest(
+    async () => await updateQuestionServices(_id, { isDeleted: true }),
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('删除成功')
+        setDeletedState(true)
+      },
+    }
+  )
 
   // 点击修改标星
   const { run: updateQuestionIsStart, loading: changeStartLoading } = useRequest(
@@ -59,6 +70,9 @@ export const QuestionCard: FC<PropsType> = props => {
       },
     }
   )
+
+  // 如果已经删除问卷了  就不要再渲染卡片了
+  if (isDeletedState) return null
 
   return (
     <div className={styles.container}>
@@ -128,9 +142,10 @@ export const QuestionCard: FC<PropsType> = props => {
               title="确定删除该问卷吗?"
               okText="确定"
               cancelText="取消"
+              icon={<ExclamationCircleOutlined />}
               onConfirm={deleteQuestion}
             >
-              <Button type="text" icon={<DeleteOutlined />} size="small">
+              <Button type="text" icon={<DeleteOutlined />} size="small" disabled={delLoading}>
                 删除
               </Button>
             </Popconfirm>
