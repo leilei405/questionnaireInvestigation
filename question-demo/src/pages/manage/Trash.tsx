@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useState } from 'react'
-import { Table, Empty, Typography, Tag, Button, Space, Spin, message } from 'antd'
+import { Table, Empty, Typography, Tag, Button, Space, Spin, message, Modal } from 'antd'
 import { useTitle, useRequest } from 'ahooks'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 // import { QuestionCard } from '../../components/QuestionCard'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 import { ListPage } from '../../components/ListPage'
-import { updateQuestionServices } from '../../services/question'
+import { deleteQuestionServices, updateQuestionServices } from '../../services/question'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 const { Title } = Typography
-
+const { confirm } = Modal
 const columns = [
   {
     title: 'ID',
@@ -55,7 +56,7 @@ const Trash: FC = () => {
     onChange: onSelectChange,
   }
 
-  // 恢复
+  // 恢复问卷
   const { run: restore } = useRequest(
     async () => {
       for await (const id of selectedRowKeys) {
@@ -68,18 +69,34 @@ const Trash: FC = () => {
       onSuccess: () => {
         message.success('恢复成功')
         refresh() // 手动刷新列表
+        setSelectedRowKeys([])
       },
     }
   )
 
-  // 彻底删除
-  const deleteTrash = () => {
-    console.log('彻底删除')
-    // setLoading(true)
-    setTimeout(() => {
-      setSelectedRowKeys([])
-      // setLoading(false)
-    }, 1000)
+  // 彻底删除问卷
+  const { run: deleteTrash } = useRequest(
+    async () => {
+      const data = await deleteQuestionServices(selectedRowKeys)
+      return data
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('删除成功')
+        refresh() // 手动刷新
+        setSelectedRowKeys([])
+      },
+    }
+  )
+
+  const delConfirm = () => {
+    confirm({
+      title: '确认彻底删除该问卷？',
+      icon: <ExclamationCircleOutlined />,
+      content: '删除以后不可以找回',
+      onOk: deleteTrash,
+    })
   }
 
   const hasSelected = selectedRowKeys.length > 0
@@ -100,7 +117,7 @@ const Trash: FC = () => {
           <Button type="primary" onClick={restore} disabled={!hasSelected} loading={loading}>
             恢复
           </Button>
-          <Button type="primary" onClick={deleteTrash} disabled={!hasSelected} loading={loading}>
+          <Button danger onClick={delConfirm} disabled={!hasSelected} loading={loading}>
             彻底删除
           </Button>
         </Space>

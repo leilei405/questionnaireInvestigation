@@ -52,3 +52,10 @@ export const copyQuestionServices = async (id: string): Promise<ResDataType> => 
   const data = (await http.post(url)) as ResDataType
   return data
 }
+
+// 删除问卷
+export const deleteQuestionServices = async (ids: string[]): Promise<ResDataType> => {
+  const url = `/api/question`
+  const data = (await http.delete(url, { data: { ids } })) as ResDataType
+  return data
+}
