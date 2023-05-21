@@ -1,23 +1,33 @@
 import React, { FC, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Card, Checkbox, Form, Input, Space, Typography } from 'antd'
+import { useRequest } from 'ahooks'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button, Card, Checkbox, Form, Input, Space, Typography, message } from 'antd'
 import { UserSwitchOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
-import { REGISTER_PATHNAME } from '../router'
+import { MANAGE_INDEX_PATHNAME, REGISTER_PATHNAME } from '../router'
 import { rememberUser, deleteUserForm, getUserInfoFormStorage } from '../utils/rememberInfo'
 import { LoginType } from '../types/LoginRegister'
+import { loginServices } from '../services/user'
 export const Login: FC = () => {
   const { Title } = Typography
   const [form] = Form.useForm() // 第三方hook
-
+  const nav = useNavigate()
   /**
    * @method onFinish
    * @param values
    * @description 登录账号
    */
+  const { run } = useRequest(async values => await loginServices({ ...values }), {
+    manual: true,
+    onSuccess: () => {
+      message.success('登录成功')
+      nav(MANAGE_INDEX_PATHNAME)
+    },
+  })
 
   const onFinish = (values: LoginType) => {
     const { username, password, remember } = values
+    run(values)
     if (remember) {
       rememberUser(username, password)
     } else {

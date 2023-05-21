@@ -1,20 +1,32 @@
 import React, { FC } from 'react'
-import { Button, Card, Form, Input, Space, Typography } from 'antd'
+import { Button, Card, Form, Input, Space, Typography, message } from 'antd'
 import { UserSwitchOutlined } from '@ant-design/icons'
+import { useRequest } from 'ahooks'
+import { useNavigate } from 'react-router-dom'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
 import { LOGIN_PATHNAME } from '../router'
 import { LoginType } from '../types/LoginRegister'
+import { registerServices } from '../services/user'
 const Register: FC = () => {
   const { Title } = Typography
-
+  const nav = useNavigate()
   /**
    * @method onFinish
    * @param values
    * @description 注册账号
    */
+
+  const { run } = useRequest(async values => await registerServices({ ...values }), {
+    manual: true,
+    onSuccess: () => {
+      message.success('注册成功')
+      nav(LOGIN_PATHNAME)
+    },
+  })
+
   const onFinish = (values: LoginType) => {
-    console.log(values, 'onFinish')
+    run(values)
   }
 
   return (
