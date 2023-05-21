@@ -1,6 +1,7 @@
 import React from 'react'
 // import { useTitle } from 'ahooks'
 import './App.css'
+import { TodoListReducer } from './TodoReducer'
 // import { StyledComponentsDemo } from './components/styledComponentsDemo'
 // import { ClosureTrap } from './components/closureTrap'
 // import { useGetInfo } from './hooks/useGetInfo'
@@ -14,7 +15,7 @@ import './App.css'
 // import { UseCallbackDemo } from './components/useCallbackDemo'
 // import { useTitle } from './hooks/useTitle'
 // import { Demo } from './ContextDemo/index'
-import { ReducerDemo } from './CountRdeucer/reducer'
+// import { ReducerDemo } from './CountRdeucer/reducer'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -35,7 +36,8 @@ function App() {
       {/* <ClosureTrap /> */}
       {/* <StyledComponentsDemo /> */}
       {/* <Demo /> */}
-      <ReducerDemo />
+      {/* <ReducerDemo /> */}
+      <TodoListReducer />
     </div>
   )
 }
