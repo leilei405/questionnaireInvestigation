@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useTitle } from 'ahooks'
 import './App.css'
-import { StyledComponentsDemo } from './components/styledComponentsDemo'
+// import { StyledComponentsDemo } from './components/styledComponentsDemo'
 // import { ClosureTrap } from './components/closureTrap'
 // import { useGetInfo } from './hooks/useGetInfo'
 // import { useMouse } from './hooks/useMouse'
@@ -13,6 +13,7 @@ import { StyledComponentsDemo } from './components/styledComponentsDemo'
 // import { UseMemoDemo } from './components/useMemoDemo'
 // import { UseCallbackDemo } from './components/useCallbackDemo'
 // import { useTitle } from './hooks/useTitle'
+import { Demo } from './ContextDemo/index'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -31,7 +32,8 @@ function App() {
       {/* <span>X:{x}--------Y:{y}</span> */}
       {/* <span>{loading ? '加载中' : info}</span> */}
       {/* <ClosureTrap /> */}
-      <StyledComponentsDemo />
+      {/* <StyledComponentsDemo /> */}
+      <Demo />
     </div>
   )
 }
