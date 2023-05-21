@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import http from './http'
 import type { ResDataType } from './http'
-
-// 定义查询参数类型
-type UserType = {
-  username: string
-  password: string
-  nickname?: string // TODO: ?  可选
-}
+import { UserType } from '../types/LoginRegister'
 
 // 获取用户信息
 export const getQuestionServices = async (): Promise<ResDataType> => {
