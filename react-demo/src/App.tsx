@@ -13,7 +13,8 @@ import './App.css'
 // import { UseMemoDemo } from './components/useMemoDemo'
 // import { UseCallbackDemo } from './components/useCallbackDemo'
 // import { useTitle } from './hooks/useTitle'
-import { Demo } from './ContextDemo/index'
+// import { Demo } from './ContextDemo/index'
+import { ReducerDemo } from './CountRdeucer/reducer'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -33,7 +34,8 @@ function App() {
       {/* <span>{loading ? '加载中' : info}</span> */}
       {/* <ClosureTrap /> */}
       {/* <StyledComponentsDemo /> */}
-      <Demo />
+      {/* <Demo /> */}
+      <ReducerDemo />
     </div>
   )
 }
