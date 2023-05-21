@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useState } from 'react'
-import { Table, Empty, Typography, Tag, Button, Space, Spin } from 'antd'
-import { useTitle } from 'ahooks'
+import { Table, Empty, Typography, Tag, Button, Space, Spin, message } from 'antd'
+import { useTitle, useRequest } from 'ahooks'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
 // import { QuestionCard } from '../../components/QuestionCard'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
 import { ListPage } from '../../components/ListPage'
+import { updateQuestionServices } from '../../services/question'
 const { Title } = Typography
 
 const columns = [
@@ -36,13 +38,14 @@ const columns = [
 const Trash: FC = () => {
   useTitle('Amorous - 回收站')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])
   // const [questionList, setQuestionList] = useState(dataList)
   // const [loading, setLoading] = useState(false)
-  const { data = {}, loading } = useLoadQuestionList({ isDeleted: true })
+  const { data = {}, loading, refresh } = useLoadQuestionList({ isDeleted: true })
   const { list = [], total = 0 } = data
 
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+  // 选中的问卷
+  const onSelectChange = (newSelectedRowKeys: any[]) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys)
   }
@@ -53,14 +56,21 @@ const Trash: FC = () => {
   }
 
   // 恢复
-  const restore = () => {
-    console.log('恢复')
-    // setLoading(true)
-    setTimeout(() => {
-      setSelectedRowKeys([])
-      // setLoading(false)
-    }, 1000)
-  }
+  const { run: restore } = useRequest(
+    async () => {
+      for await (const id of selectedRowKeys) {
+        await updateQuestionServices(id, { isDeleted: false })
+      }
+    },
+    {
+      manual: true,
+      debounceWait: 500, // 防抖 防止重复点击
+      onSuccess: () => {
+        message.success('恢复成功')
+        refresh() // 手动刷新列表
+      },
+    }
+  )
 
   // 彻底删除
   const deleteTrash = () => {

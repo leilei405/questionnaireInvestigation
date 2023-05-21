@@ -33,7 +33,7 @@ export const useLoadQuestionList = (option: Partial<OptionType> = {}) => {
   }
 
   // useRequest  refreshDeps(配置项)
-  const { data, loading, error } = useRequest(queryParams, {
+  const { data, loading, error, refresh } = useRequest(queryParams, {
     refreshDeps: [searchParams], // 刷新依赖项
   })
 
@@ -41,5 +41,6 @@ export const useLoadQuestionList = (option: Partial<OptionType> = {}) => {
     data,
     loading,
     error,
+    refresh,
   }
 }
