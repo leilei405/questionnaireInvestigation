@@ -3,15 +3,40 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 
 module.exports = [
+    // 获取用户信息
     {
-        url: '/api/user',
+        url: '/api/user/info',
         method: 'get',
         response() {
             return {
                 errno: 0,
                 data: {
-                    name: Random.cname(),
-                    name: Random.id(),
+                    username: Random.title(),
+                    nickname: Random.cname(),
+                    // name: Random.id(),
+                }
+            }
+        }
+    },
+    // 注册
+    {
+        url: '/api/user/register',
+        method: 'post',
+        response() {
+            return {
+                errno: 0,
+            }
+        }
+    }, 
+    // 登录
+    {
+        url: '/api/user/login',
+        method: 'post',
+        response() {
+            return {
+                errno: 0,
+                data: {
+                    token: Random.word(20)
                 }
             }
         }
