@@ -5,7 +5,12 @@ import { Button, Card, Checkbox, Form, Input, Space, Typography, message } from 
 import { UserSwitchOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
 import { MANAGE_INDEX_PATHNAME, REGISTER_PATHNAME } from '../router'
-import { rememberUser, deleteUserForm, getUserInfoFormStorage } from '../utils/rememberInfo'
+import {
+  rememberUser,
+  deleteUserForm,
+  getUserInfoFormStorage,
+  setToken,
+} from '../utils/rememberInfo'
 import { LoginType } from '../types/LoginRegister'
 import { loginServices } from '../services/user'
 export const Login: FC = () => {
@@ -19,9 +24,12 @@ export const Login: FC = () => {
    */
   const { run } = useRequest(async values => await loginServices({ ...values }), {
     manual: true,
-    onSuccess: () => {
+    onSuccess: result => {
+      const { token = '' } = result
+      // 存储设置token
+      setToken(token)
       message.success('登录成功')
-      nav(MANAGE_INDEX_PATHNAME)
+      nav(MANAGE_INDEX_PATHNAME) // 跳转到我的问卷
     },
   })
 
