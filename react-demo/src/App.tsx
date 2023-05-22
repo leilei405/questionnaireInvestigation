@@ -1,7 +1,7 @@
 import React from 'react'
-// import { useTitle } from 'ahooks'
 import './App.css'
-import { TodoListReducer } from './TodoReducer'
+// import { useTitle } from 'ahooks'
+// import { TodoListReducer } from './TodoReducer'
 // import { StyledComponentsDemo } from './components/styledComponentsDemo'
 // import { ClosureTrap } from './components/closureTrap'
 // import { useGetInfo } from './hooks/useGetInfo'
@@ -15,7 +15,9 @@ import { TodoListReducer } from './TodoReducer'
 // import { UseCallbackDemo } from './components/useCallbackDemo'
 // import { useTitle } from './hooks/useTitle'
 // import { Demo } from './ContextDemo/index'
-// import { ReducerDemo } from './CountRdeucer/reducer'
+// import { ReducerDemo } from './CountReducer/reducer'
+import Count from './pages/countPage'
+import TodoList from './pages/todoList'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -37,7 +39,9 @@ function App() {
       {/* <StyledComponentsDemo /> */}
       {/* <Demo /> */}
       {/* <ReducerDemo /> */}
-      <TodoListReducer />
+      {/* <TodoListReducer /> */}
+      <Count />
+      <TodoList />
     </div>
   )
 }

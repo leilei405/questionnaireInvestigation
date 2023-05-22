@@ -8,6 +8,8 @@
         "datetime",
         "immer",
         "mockjs",
-        "Popconfirm"
-    ]
+        "Popconfirm",
+        "reduxjs"
+    ],
+    "vue.features.codeActions.enable": false
 }
