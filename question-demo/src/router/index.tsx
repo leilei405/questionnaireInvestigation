@@ -78,3 +78,13 @@ export const HOME_PATHNAME = '/'
 export const LOGIN_PATHNAME = '/login'
 export const REGISTER_PATHNAME = '/register'
 export const MANAGE_INDEX_PATHNAME = '/manage/list'
+
+export const isLoginOrRegister = (pathname: string) => {
+  if ([LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
+  return false
+}
+
+export const isNeedUserData = (pathname: string) => {
+  if ([HOME_PATHNAME, LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
+  return false
+}

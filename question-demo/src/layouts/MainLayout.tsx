@@ -5,11 +5,11 @@ import styles from './MainLayout.module.scss'
 import Logo from '../components/Logo'
 import UserInfo from '../components/UserInfo'
 import { useLoadUserData } from '../hooks/useLoadUserData' // 异步加载获取用户信息
-
+import { useNavPage } from '../hooks/useNavPage' // 用户是否登录自定义hook
 const { Header, Footer, Content } = Layout
 const MainLayout: FC = () => {
   const { waitUserData } = useLoadUserData()
-
+  useNavPage(waitUserData)
   return (
     <Layout>
       <Header className={styles.header}>

@@ -14,6 +14,8 @@ module.exports = [
                     username: Random.title(),
                     nickname: Random.cname(),
                     // name: Random.id(),
+                    // errno: 100,
+                    // msg: '获取用户信息'
                 }
             }
         }
