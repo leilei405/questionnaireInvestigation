@@ -1,20 +1,30 @@
 import React, { FC } from 'react'
-import { useRequest } from 'ahooks'
+// import { useRequest } from 'ahooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, message } from 'antd'
+import { useDispatch } from 'react-redux'
 import { UserOutlined } from '@ant-design/icons'
 import { LOGIN_PATHNAME } from '../router'
-import { getQuestionServices } from '../services/user'
+// import { getQuestionServices } from '../services/user'
 import { removeToken } from '../utils/rememberInfo'
+import { userGetUserInfo } from '../hooks/userGetUserInfo' // 自定义hook 获取用户信息
+import { logoutReducer } from '../store/userReducer'
 
 const UserInfo: FC = () => {
   const nav = useNavigate()
-  const { data } = useRequest(getQuestionServices)
-  const { nickname, username } = data || {}
+  const dispatch = useDispatch()
+
+  // 使用自定义hook可全局管理用户信息
+  const { nickname, username } = userGetUserInfo()
+
+  // ajax请求获取用户信息
+  // const { data } = useRequest(getQuestionServices)
+  // const { nickname, username } = data || {}
 
   // 退出
   const logout = () => {
-    removeToken()
+    dispatch(logoutReducer()) // 退出登录时候清空redux user 数据
+    removeToken() // 清除token
     message.success('退出成功')
     nav(LOGIN_PATHNAME)
   }
