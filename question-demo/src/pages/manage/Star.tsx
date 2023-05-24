@@ -5,7 +5,7 @@ import { useTitle } from 'ahooks'
 import styles from './common.module.scss'
 import { QuestionCard } from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
-import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
+import { useLoadQuestionList } from '../../hooks/useLoadQuestionListData'
 import { ListPage } from '../../components/ListPage'
 const { Title } = Typography
 

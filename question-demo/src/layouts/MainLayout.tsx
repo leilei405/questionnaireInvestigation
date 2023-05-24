@@ -1,11 +1,15 @@
 import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Layout } from 'antd'
-const { Header, Footer, Content } = Layout
+import { Layout, Spin } from 'antd'
 import styles from './MainLayout.module.scss'
 import Logo from '../components/Logo'
 import UserInfo from '../components/UserInfo'
+import { useLoadUserData } from '../hooks/useLoadUserData' // 异步加载获取用户信息
+
+const { Header, Footer, Content } = Layout
 const MainLayout: FC = () => {
+  const { waitUserData } = useLoadUserData()
+
   return (
     <Layout>
       <Header className={styles.header}>
@@ -17,7 +21,13 @@ const MainLayout: FC = () => {
         </div>
       </Header>
       <Content className={styles.main}>
-        <Outlet />
+        {waitUserData ? (
+          <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            <Spin />
+          </div>
+        ) : (
+          <Outlet />
+        )}
       </Content>
       <Footer className={styles.footer}>
         Amorous 问卷调查 在线问卷 &copy;2023 - author Amorous
