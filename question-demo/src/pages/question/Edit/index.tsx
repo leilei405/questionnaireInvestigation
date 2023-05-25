@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
+// import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
 import styles from './index.module.scss'
+import { EditCanvas } from './EditCanvas'
 const Edit: FC = () => {
   // 获取问卷详情
-  const { loading, data } = useLoadQuestionData()
+  // const { loading, data } = useLoadQuestionData()
   return (
     <div className={styles.container}>
       {/* 顶部 */}
@@ -14,7 +15,9 @@ const Edit: FC = () => {
           <div className={styles.left}>Left</div>
           <div className={styles.main}>
             <div className={styles['canvas-wrapper']}>
-              <div style={{ height: '900px' }}>画布滚动</div>
+              <div style={{ height: '900px' }}>
+                <EditCanvas />
+              </div>
             </div>
           </div>
           <div className={styles.right}>Right</div>
