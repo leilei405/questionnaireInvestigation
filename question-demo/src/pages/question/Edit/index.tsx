@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import styles from './index.module.scss'
 import { EditCanvas } from './EditCanvas'
 const Edit: FC = () => {
-  // 获取问卷详情
+  // 获取问卷详情 test
   // const { loading, data } = useLoadQuestionData()
   return (
     <div className={styles.container}>
