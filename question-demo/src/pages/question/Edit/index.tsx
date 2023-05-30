@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-// import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
+import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
 import styles from './index.module.scss'
 import { EditCanvas } from './EditCanvas'
 const Edit: FC = () => {
   // 获取问卷详情 test
-  // const { loading, data } = useLoadQuestionData()
+  const { loading, data } = useLoadQuestionData()
   return (
     <div className={styles.container}>
       {/* 顶部 */}

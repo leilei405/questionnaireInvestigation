@@ -12,7 +12,39 @@ module.exports = [
                 errno: 0,
                 data: {
                     id: Random.id(),
-                    title: Random.ctitle()
+                    title: Random.ctitle(),
+                    componentList: [
+                        // title
+                        {
+                            title: Random.id(),
+                            // 组件可惜需要前后端统一好
+                            type: 'questionTitle',
+                            title: '标题',
+                            props: {
+                                text: '一行标题',
+                                level: 1,
+                                isCenter: false,
+                            }
+                        },
+                        // Input
+                        {
+                            title: Random.id(),
+                            type: 'questionInput',
+                            props: {
+                                title: '输入框1',
+                                placeholder: '请输入'
+                            }
+                        },
+                        // Input
+                        {
+                            title: Random.id(),
+                            type: 'questionInput',
+                            props: {
+                                title: '输入框2',
+                                placeholder: '请输入'
+                            }
+                        },
+                    ]
                 }
             }
         }
