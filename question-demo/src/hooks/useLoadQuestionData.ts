@@ -27,8 +27,13 @@ export const useLoadQuestionData = () => {
     if (!data) return
     // const { title = '', componentList = [] } = data
     const { componentList = [] } = data
+    // 获取默认的 selectedId
+    let selectedId = ''
+    if (componentList.length > 0) {
+      selectedId = componentList[0].fe_id // 默认选中第一个组件
+    }
     // 把 componentList 存储到Redux store 中
-    dispatch(resetComponents({ componentList }))
+    dispatch(resetComponents({ componentList, selectedId }))
   }, [data])
 
   // 根据id变化, 监听 执行 ajax 加载问卷数据

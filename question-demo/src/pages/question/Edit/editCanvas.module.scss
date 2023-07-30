@@ -13,6 +13,11 @@
     }
 }
 
+// 选中的组件 id 的border
+.selected {
+    border-color: #1890ff !important;
+}
+
 .component {
     pointer-events: none; // 屏蔽鼠标行为,在canvas中不被点击到
 }

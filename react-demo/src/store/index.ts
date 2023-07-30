@@ -11,7 +11,7 @@ export default configureStore({
   reducer: {
     count: countReducer,
 
-    todoList: todoListReducer
+    todoList: todoListReducer,
     // 可加载多个模块
   },
 })
