@@ -3,12 +3,16 @@ import styles from './editCanvas.module.scss'
 import { QuestionTitle } from '../../../components/questionComponents/questionTitle/ComponentsTitle'
 import { QuestionInput } from '../../../components/questionComponents/questionInput/ComponentsInput'
 import { Spin } from 'antd'
+import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 
 type PropsType = {
   loading: boolean
 }
 
 export const EditCanvas: FC<PropsType> = ({ loading }) => {
+  const { componentList } = useGetComponentInfo()
+  console.log(componentList)
+
   if (loading) {
     return (
       <div style={{ marginTop: '50%', textAlign: 'center' }}>

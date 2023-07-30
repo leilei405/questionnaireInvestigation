@@ -8,8 +8,8 @@ export type StateType = {
 
 export default configureStore({
   reducer: {
-    user: userReducer,
-    components: componentReducer,
+    user: userReducer, // 用户信息
+    components: componentReducer, // 组件列表
     // 模块扩展
   },
 })

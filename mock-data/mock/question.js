@@ -16,7 +16,7 @@ module.exports = [
                     componentList: [
                         // title
                         {
-                            title: Random.id(),
+                            fe_id: Random.id(),
                             // 组件可惜需要前后端统一好
                             type: 'questionTitle',
                             title: '标题',
@@ -28,19 +28,21 @@ module.exports = [
                         },
                         // Input
                         {
-                            title: Random.id(),
+                            fe_id: Random.id(),
                             type: 'questionInput',
+                            title: '输入框1',
                             props: {
-                                title: '输入框1',
+                                title: '姓名',
                                 placeholder: '请输入'
                             }
                         },
                         // Input
                         {
-                            title: Random.id(),
+                            fe_id: Random.id(),
                             type: 'questionInput',
+                            title: '输入框2',
                             props: {
-                                title: '输入框2',
+                                title: '年龄',
                                 placeholder: '请输入'
                             }
                         },

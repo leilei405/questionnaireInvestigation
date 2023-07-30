@@ -9,6 +9,7 @@ export const useLoadQuestionData = () => {
   const { id = '' } = useParams()
   const dispatch = useDispatch()
 
+  // 使用useRequest 来加载数据
   const { data, loading, error, run } = useRequest(
     async (id: string) => {
       if (!id) throw new Error('没有问卷 id')
@@ -16,18 +17,20 @@ export const useLoadQuestionData = () => {
       return data
     },
     {
+      // 手动的
       manual: true,
     }
   )
 
+  // 根据获取的data 设置 redux store
   useEffect(() => {
     if (!data) return
     const { title = '', componentList = [] } = data
     // 把 componentList 存储到Redux store 中
-    dispatch(resetComponents(componentList))
-  }, [])
+    dispatch(resetComponents({ componentList }))
+  }, [data])
 
-  // 判断id 变化,执行 ajax 加载问卷数据
+  // 根据id变化, 监听 执行 ajax 加载问卷数据
   useEffect(() => {
     run(id)
   }, [id])

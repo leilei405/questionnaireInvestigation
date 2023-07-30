@@ -8,9 +8,10 @@ import { QuestionInputDefaultProps } from './inputType'
 
 export * from './inputType'
 
+// Input 组件配置
 export default {
   title: '输入框',
   type: 'questionInput', // 与后端统一好
-  QuestionInput,
+  Component: QuestionInput,
   defaultProps: QuestionInputDefaultProps,
 }

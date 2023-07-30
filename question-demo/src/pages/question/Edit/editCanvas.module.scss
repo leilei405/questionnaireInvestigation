@@ -14,5 +14,5 @@
 }
 
 .component {
-    pointer-events: none;
+    pointer-events: none; // 屏蔽鼠标行为,在canvas中不被点击到
 }
