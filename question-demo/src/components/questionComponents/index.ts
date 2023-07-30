@@ -18,6 +18,7 @@ export type ComponentConfType = {
 // 全部组件配置的列表
 const componentConfigList: ComponentConfType[] = [QuestionInputConfig, QuestionTitleConfig]
 
+// 根据类型 判断 返回当前的组件
 export function getComponentConfigByType(type: string) {
   return componentConfigList.find(c => c.type === type)
 }

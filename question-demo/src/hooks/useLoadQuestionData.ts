@@ -25,7 +25,8 @@ export const useLoadQuestionData = () => {
   // 根据获取的data 设置 redux store
   useEffect(() => {
     if (!data) return
-    const { title = '', componentList = [] } = data
+    // const { title = '', componentList = [] } = data
+    const { componentList = [] } = data
     // 把 componentList 存储到Redux store 中
     dispatch(resetComponents({ componentList }))
   }, [data])
