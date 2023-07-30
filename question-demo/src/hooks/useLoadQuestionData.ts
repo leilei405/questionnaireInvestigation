@@ -22,7 +22,7 @@ export const useLoadQuestionData = () => {
     }
   )
 
-  // 根据获取的data 设置 redux store
+  // 根据获取的data 设置 redux store1
   useEffect(() => {
     if (!data) return
     // const { title = '', componentList = [] } = data
