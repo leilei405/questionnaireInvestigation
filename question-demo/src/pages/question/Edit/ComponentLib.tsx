@@ -1,17 +1,31 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
-import { ComponentGroup } from '../../../components/questionComponents' // 分组
-
+import { ComponentGroup, ComponentConfType } from '../../../components/questionComponents' // 分组
+import styles from './ComponentLib.module.scss'
 const { Title } = Typography
 const Lib: FC = () => {
+  // 生成组件
+  const genComponent = (components: ComponentConfType) => {
+    // const { title, type, Component } = components
+    const { Component } = components
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.component}>
+          <Component />
+        </div>
+      </div>
+    )
+  }
   return (
     <div>
       {ComponentGroup.map((item, index) => {
+        const { groupId, groupName, components } = item
         return (
-          <div key={item.groupId}>
+          <div key={groupId}>
             <Title level={3} style={{ fontSize: '16px', marginTop: index > 0 ? '20px' : 0 }}>
-              {item.groupName}
+              {groupName}
             </Title>
+            <div>{components.map(item => genComponent(item))}</div>
           </div>
         )
       })}
