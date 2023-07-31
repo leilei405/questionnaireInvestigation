@@ -38,11 +38,30 @@ export const componentsSlice = createSlice({
       draft.selectedId = action.payload
       // immer 改变的react 不可变数据的写法  不需要再返回新的state
     }),
+
+    // 添加新组件到画布
+    addComponent: produce(
+      (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
+        const newComponent = action.payload
+        const { selectedId, componentList } = draft
+        // 找到当前选中组件的index
+        const index = componentList.findIndex(component => component.fe_id === selectedId)
+        // 未选中任何组件
+        if (index < 0) {
+          draft.componentList.push(newComponent)
+        } else {
+          // 选中组件插入到index后面splice(开始位置,结束位置,插入的元素)
+          draft.componentList.splice(index + 1, 0, newComponent)
+        }
+        // 重新设置selectedId
+        draft.selectedId = newComponent.fe_id
+      }
+    ),
   },
 })
 
 // 导出actions
-export const { resetComponents, changeSelectId } = componentsSlice.actions
+export const { resetComponents, changeSelectId, addComponent } = componentsSlice.actions
 
 // 导出reducer
 export default componentsSlice.reducer
