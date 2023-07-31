@@ -4,7 +4,8 @@ import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
 import styles from './index.module.scss'
 import { EditCanvas } from './EditCanvas'
 import { changeSelectId } from '../../../store/componentReducer'
-import LeftComponentPanel from './LeftPanel'
+import LeftComponentPanel from './LeftPanel' // 左边组件,图层
+import RightComponentPanel from './RightPanel' // 右边属性设置
 const Edit: FC = () => {
   // 获取问卷详情 test
   const { loading } = useLoadQuestionData()
@@ -31,7 +32,9 @@ const Edit: FC = () => {
               </div>
             </div>
           </div>
-          <div className={styles.right}>Right</div>
+          <div className={styles.right}>
+            <RightComponentPanel />
+          </div>
         </div>
       </div>
     </div>
