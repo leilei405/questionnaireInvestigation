@@ -6,6 +6,7 @@ import { EditCanvas } from './EditCanvas'
 import { changeSelectId } from '../../../store/componentReducer'
 import LeftComponentPanel from './LeftPanel' // 左边组件,图层
 import RightComponentPanel from './RightPanel' // 右边属性设置
+import EditHeader from './EditHeader'
 const Edit: FC = () => {
   // 获取问卷详情 test
   const { loading } = useLoadQuestionData()
@@ -18,7 +19,9 @@ const Edit: FC = () => {
   return (
     <div className={styles.container}>
       {/* 顶部 */}
-      <div className={styles.header}>Header</div>
+      <div className={styles.header}>
+        <EditHeader />
+      </div>
       {/* 主体内容区域 */}
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
