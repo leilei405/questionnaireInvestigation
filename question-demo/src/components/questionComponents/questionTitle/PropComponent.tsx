@@ -10,15 +10,30 @@ const options = [
 ]
 
 const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType) => {
-  const { text, level, isCenter } = props
+  const { text, level, isCenter, onChange } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
-    form.setFieldsValue({ text, level, isCenter })
+    form.setFieldsValue({
+      text,
+      level,
+      isCenter,
+    })
   }, [text, level, isCenter])
 
+  const handleValueChange = () => {
+    if (onChange) {
+      onChange(form.getFieldsValue())
+    }
+  }
+
   return (
-    <Form layout="vertical" initialValues={{ text, level, isCenter }} form={form}>
+    <Form
+      layout="vertical"
+      onValuesChange={handleValueChange}
+      initialValues={{ text, level, isCenter }}
+      form={form}
+    >
       <Form.Item
         label="标题内容"
         name="text"
