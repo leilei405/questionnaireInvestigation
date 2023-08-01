@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import { getComponentConfigByType } from '../../../components/questionComponents'
 import { ComponentInfoType, changeSelectId } from '../../../store/componentReducer'
+import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
 type PropsType = {
   loading: boolean
 }
@@ -27,10 +28,13 @@ export const EditCanvas: FC<PropsType> = ({ loading }) => {
   // console.log(componentList, '服务端Mock的数据')
   const dispatch = useDispatch()
 
+  // 点击选中组件
   const handleClick = (event: MouseEvent, id: string) => {
     event.stopPropagation() // 阻止事件冒泡
     dispatch(changeSelectId(id))
   }
+
+  useBindCanvasKeyPress()
 
   if (loading) {
     return (
