@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import produce from 'immer'
+import { nanoid } from 'nanoid'
+import { cloneDeep } from 'lodash'
 import { ComponentPropsType } from '../../components/questionComponents'
-import { getNextSelectedId } from './utils'
+import { getNextSelectedId, insertNewComponent } from './utils'
 // 定义每个组件的类型
 export type ComponentInfoType = {
   fe_id: string
@@ -17,12 +19,14 @@ export type ComponentsStateType = {
   // 记录选中组件的ID
   selectedId: string
   componentList: Array<ComponentInfoType>
+  copiedComponent: ComponentInfoType | null // null表示没有拷贝信息
 }
 
 // 初始化的数据结构
 const INIT_STATE: ComponentsStateType = {
   selectedId: '',
   componentList: [],
+  copiedComponent: null, // 存储复制的组件
   // 其他扩展
 }
 
@@ -45,18 +49,7 @@ export const componentsSlice = createSlice({
     addComponent: produce(
       (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
         const newComponent = action.payload
-        const { selectedId, componentList } = draft
-        // 找到当前选中组件的index
-        const index = componentList.findIndex(component => component.fe_id === selectedId)
-        // 未选中任何组件
-        if (index < 0) {
-          draft.componentList.push(newComponent)
-        } else {
-          // 选中组件插入到index后面splice(开始位置,结束位置,插入的元素)
-          draft.componentList.splice(index + 1, 0, newComponent)
-        }
-        // 重新设置selectedId
-        draft.selectedId = newComponent.fe_id
+        insertNewComponent(draft, newComponent)
       }
     ),
 
@@ -127,6 +120,27 @@ export const componentsSlice = createSlice({
         }
       }
     ),
+
+    // 拷贝当前选中的组件
+    copySelectedIdComponent: produce((draft: ComponentsStateType) => {
+      // draft 找到当前选中的ID
+      const { selectedId, componentList = [] } = draft
+      const selectedComponent = componentList.find(c => c.fe_id === selectedId)
+      if (selectedComponent == null) return
+      draft.copiedComponent = cloneDeep(selectedComponent)
+    }),
+
+    // 粘贴复制的组件
+    pasteCopiedComponent: produce((draft: ComponentsStateType) => {
+      const { copiedComponent } = draft
+      if (copiedComponent == null) return
+
+      // 需要修改fe_id
+      copiedComponent.fe_id = nanoid()
+
+      // 插入copiedComponent
+      insertNewComponent(draft, copiedComponent)
+    }),
   },
 })
 
@@ -139,6 +153,8 @@ export const {
   removeSelectedComponent,
   changeComponentHidden,
   toggleComponentLocked,
+  copySelectedIdComponent,
+  pasteCopiedComponent,
 } = componentsSlice.actions
 
 // 导出reducer

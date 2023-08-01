@@ -15,13 +15,15 @@ import {
 } from '@ant-design/icons'
 import {
   changeComponentHidden,
+  copySelectedIdComponent,
+  pasteCopiedComponent,
   removeSelectedComponent,
   toggleComponentLocked,
 } from '../../../store/componentReducer'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 const EditToolbar: FC = () => {
   const dispatch = useDispatch()
-  const { selectedId, selectedComponent } = useGetComponentInfo()
+  const { selectedId, selectedComponent, copiedComponent } = useGetComponentInfo()
   const { isLocked } = selectedComponent || {}
   // 删除选中组件
   const handleCLickDelete = () => {
@@ -36,6 +38,16 @@ const EditToolbar: FC = () => {
   // 锁定选中组件
   const handleLock = () => {
     dispatch(toggleComponentLocked({ fe_id: selectedId }))
+  }
+
+  // 复制
+  const copy = () => {
+    dispatch(copySelectedIdComponent())
+  }
+
+  // 粘贴组件
+  const paste = () => {
+    dispatch(pasteCopiedComponent())
   }
   return (
     <Space>
@@ -53,10 +65,15 @@ const EditToolbar: FC = () => {
         ></Button>
       </Tooltip>
       <Tooltip title="复制组件">
-        <Button shape="circle" icon={<CopyTwoTone />}></Button>
+        <Button onClick={copy} shape="circle" icon={<CopyTwoTone />}></Button>
       </Tooltip>
       <Tooltip title="粘贴组件">
-        <Button shape="circle" icon={<FileAddTwoTone />}></Button>
+        <Button
+          onClick={paste}
+          disabled={copiedComponent == null}
+          shape="circle"
+          icon={<FileAddTwoTone />}
+        ></Button>
       </Tooltip>
       <Tooltip title="上移组件">
         <Button shape="circle" icon={<UpCircleTwoTone />}></Button>
