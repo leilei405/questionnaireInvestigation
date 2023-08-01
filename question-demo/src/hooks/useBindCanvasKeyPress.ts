@@ -10,7 +10,7 @@ import {
 const isActiveElementValid = () => {
   const activeElem = document.activeElement
 
-  // 等于document.body 说明在画布上  不在其他地方
+  // 等于document.body 说明在画布上  不在其他地方1
   if (activeElem === document.body) return true
 
   return false
