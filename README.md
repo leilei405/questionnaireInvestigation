@@ -11,13 +11,6 @@
 
 ![PC效果](E:\githubProject\questionnaireInvestigation\img\pc.png)
 
-
-
 ### H5-UI图
 
 ![H5-UI图](E:\githubProject\questionnaireInvestigation\img\h5.png)
-
-
-
-
-
