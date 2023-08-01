@@ -20,6 +20,7 @@ module.exports = [
                             // 组件可惜需要前后端统一好
                             type: 'questionTitle',
                             title: '标题',
+                            isHidden: false,
                             props: {
                                 text: '一行标题',
                                 level: 1,
@@ -31,6 +32,7 @@ module.exports = [
                             fe_id: Random.id(),
                             type: 'questionInput',
                             title: '输入框1',
+                            isHidden: false,
                             props: {
                                 title: '姓名',
                                 placeholder: '请输入'
@@ -41,6 +43,7 @@ module.exports = [
                             fe_id: Random.id(),
                             type: 'questionInput',
                             title: '输入框2',
+                            isHidden: false,
                             props: {
                                 title: '年龄',
                                 placeholder: '请输入'
