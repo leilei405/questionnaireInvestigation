@@ -15,7 +15,7 @@ const ComponentProp: FC = () => {
   // 在redux中获取信息
   const { selectedComponent } = useGetComponentInfo()
   if (selectedComponent == null) return <NoProp />
-  const { type, props } = selectedComponent
+  const { type, props, isLocked, isHidden } = selectedComponent
   // 通过type 获取组件配置
   const componentConfig = getComponentConfigByType(type)
   if (componentConfig == null) return <NoProp />
@@ -32,7 +32,7 @@ const ComponentProp: FC = () => {
     console.log(newProps, 'new')
   }
 
-  return <PropComponent {...props} onChange={changeProps} />
+  return <PropComponent {...props} onChange={changeProps} disabled={isLocked || isHidden} />
 }
 
 export default ComponentProp

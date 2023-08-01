@@ -11,12 +11,18 @@ import {
   FileAddTwoTone,
   RollbackOutlined,
   RedoOutlined,
+  UnlockTwoTone,
 } from '@ant-design/icons'
-import { changeComponentHidden, removeSelectedComponent } from '../../../store/componentReducer'
+import {
+  changeComponentHidden,
+  removeSelectedComponent,
+  toggleComponentLocked,
+} from '../../../store/componentReducer'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 const EditToolbar: FC = () => {
   const dispatch = useDispatch()
-  const { selectedId } = useGetComponentInfo()
+  const { selectedId, selectedComponent } = useGetComponentInfo()
+  const { isLocked } = selectedComponent || {}
   // 删除选中组件
   const handleCLickDelete = () => {
     dispatch(removeSelectedComponent())
@@ -25,6 +31,11 @@ const EditToolbar: FC = () => {
   // 隐藏选中组件
   const handleHidden = () => {
     dispatch(changeComponentHidden({ fe_id: selectedId, isHidden: true }))
+  }
+
+  // 锁定选中组件
+  const handleLock = () => {
+    dispatch(toggleComponentLocked({ fe_id: selectedId }))
   }
   return (
     <Space>
@@ -35,7 +46,11 @@ const EditToolbar: FC = () => {
         <Button onClick={handleHidden} shape="circle" icon={<EyeInvisibleTwoTone />}></Button>
       </Tooltip>
       <Tooltip title="锁定组件">
-        <Button shape="circle" icon={<LockTwoTone />}></Button>
+        <Button
+          onClick={handleLock}
+          shape="circle"
+          icon={isLocked ? <LockTwoTone /> : <UnlockTwoTone />}
+        ></Button>
       </Tooltip>
       <Tooltip title="复制组件">
         <Button shape="circle" icon={<CopyTwoTone />}></Button>

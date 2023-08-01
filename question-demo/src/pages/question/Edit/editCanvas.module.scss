@@ -18,6 +18,11 @@
     border-color: #1890ff !important;
 }
 
+.locked {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
 .component {
     pointer-events: none; // 屏蔽鼠标行为,在canvas中不被点击到
 }

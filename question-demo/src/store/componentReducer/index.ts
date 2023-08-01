@@ -7,7 +7,8 @@ export type ComponentInfoType = {
   fe_id: string
   type: string
   title: string
-  isHidden?: boolean
+  isHidden?: boolean // 是否隐藏组件
+  isLocked?: boolean // 是否锁定组件
   props: ComponentPropsType
 }
 
@@ -115,6 +116,17 @@ export const componentsSlice = createSlice({
         }
       }
     ),
+
+    // 是否锁定组件
+    toggleComponentLocked: produce(
+      (draft: ComponentsStateType, action: PayloadAction<{ fe_id: string }>) => {
+        const { fe_id } = action.payload
+        const curComp = draft.componentList.find(c => c.fe_id === fe_id)
+        if (curComp) {
+          curComp.isLocked = !curComp.isLocked
+        }
+      }
+    ),
   },
 })
 
@@ -126,6 +138,7 @@ export const {
   changeComponentProps,
   removeSelectedComponent,
   changeComponentHidden,
+  toggleComponentLocked,
 } = componentsSlice.actions
 
 // 导出reducer

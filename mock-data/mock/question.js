@@ -21,6 +21,7 @@ module.exports = [
                             type: 'questionTitle',
                             title: '标题',
                             isHidden: false,
+                            isLocked: false,
                             props: {
                                 text: '一行标题',
                                 level: 1,
@@ -33,6 +34,7 @@ module.exports = [
                             type: 'questionInput',
                             title: '输入框1',
                             isHidden: false,
+                            isLocked: false,
                             props: {
                                 title: '姓名',
                                 placeholder: '请输入'
@@ -44,6 +46,7 @@ module.exports = [
                             type: 'questionInput',
                             title: '输入框2',
                             isHidden: false,
+                            isLocked: false,
                             props: {
                                 title: '年龄',
                                 placeholder: '请输入'
