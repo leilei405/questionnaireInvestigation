@@ -76,6 +76,18 @@ module.exports = [
                                 desc: '问卷描述'
                             }
                         },
+                        // TextArea
+                        {
+                            fe_id: Random.id(),
+                            type: 'questionTextArea',
+                            title: '多行输入',
+                            isHidden: false,
+                            isLocked: false,
+                            props: {
+                                title: '你的兴趣',
+                                desc: '请输入...'
+                            }
+                        },
                     ]
                 }
             }
