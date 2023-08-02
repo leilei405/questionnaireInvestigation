@@ -52,6 +52,30 @@ module.exports = [
                                 placeholder: '请输入'
                             }
                         },
+                        // Paragraph
+                        {
+                            fe_id: Random.id(),
+                            type: 'questionParagraph',
+                            title: '段落',
+                            isHidden: false,
+                            isLocked: false,
+                            props: {
+                                title: '一行段落',
+                                idCenter: false
+                            }
+                        },
+                        // Info
+                        {
+                            fe_id: Random.id(),
+                            type: 'questionInfo',
+                            title: '问卷信息',
+                            isHidden: false,
+                            isLocked: false,
+                            props: {
+                                title: '问卷标题',
+                                desc: '问卷描述'
+                            }
+                        },
                     ]
                 }
             }
