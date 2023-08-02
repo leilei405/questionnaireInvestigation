@@ -6,10 +6,12 @@
         "craco",
         "ctitle",
         "datetime",
+        "downarrow",
         "immer",
         "mockjs",
         "Popconfirm",
-        "reduxjs"
+        "reduxjs",
+        "uparrow"
     ],
     "vue.features.codeActions.enable": false
 }
