@@ -5,7 +5,7 @@ import { QuestionRadioDefaultProps, QuestionRadioPropsType } from './radioType'
 const { Paragraph } = Typography
 
 export const QuestionRadio: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
-  const { title, isVertical, value, options } = { ...QuestionRadioDefaultProps, ...props }
+  const { title, isVertical, options } = { ...QuestionRadioDefaultProps, ...props }
 
   return (
     <div>
