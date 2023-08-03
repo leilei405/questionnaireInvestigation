@@ -16,8 +16,9 @@ import './App.css'
 // import { useTitle } from './hooks/useTitle'
 // import { Demo } from './ContextDemo/index'
 // import { ReducerDemo } from './CountReducer/reducer'
-import Count from './pages/countPage'
-import TodoList from './pages/todoList'
+// import Count from './pages/countPage'
+// import TodoList from './pages/todoList'
+import RadioDemo from './Radio'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -40,8 +41,9 @@ function App() {
       {/* <Demo /> */}
       {/* <ReducerDemo /> */}
       {/* <TodoListReducer /> */}
-      <Count />
-      <TodoList />
+      {/* <Count /> */}
+      {/* <TodoList /> */}
+      <RadioDemo />
     </div>
   )
 }

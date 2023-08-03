@@ -88,6 +88,24 @@ module.exports = [
                                 desc: '请输入...'
                             }
                         },
+                        // radio
+                        {
+                            fe_id: Random.id(),
+                            type: 'questionRadio',
+                            title: '单选',
+                            isHidden: false,
+                            isLocked: false,
+                            props: {
+                                title: '单选标题',
+                                isVertical: false,
+                                options: [
+                                    { value: 'item1', text: '选项1' },
+                                    { value: 'item2', text: '选项2' },
+                                    { value: 'item3', text: '选项3' },
+                                ],
+                                value: '', // 默认值
+                            }
+                        },
                     ]
                 }
             }
