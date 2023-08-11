@@ -10,7 +10,7 @@ export const QuestionRadio: FC<QuestionRadioPropsType> = (props: QuestionRadioPr
   return (
     <div>
       <Paragraph strong>{title}</Paragraph>
-      <Radio.Group>
+      <Radio.Group style={{ margin: '5px' }}>
         <Space direction={isVertical ? 'vertical' : 'horizontal'}>
           {options?.map(item => {
             const { value, text } = item

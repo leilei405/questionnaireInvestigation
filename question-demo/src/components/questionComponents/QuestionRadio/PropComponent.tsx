@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Input, Form, Checkbox, Select, Button, Space } from 'antd'
-import { QuestionRadioPropsType } from './radioType'
+import { nanoid } from 'nanoid'
+import { QuestionRadioPropsType, OptionType } from './radioType'
 import { PlusOutlined, MinusCircleTwoTone } from '@ant-design/icons'
 
 const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
@@ -12,9 +13,22 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
   }, [title, isVertical, value, options])
 
   const handleValueChange = () => {
-    if (onChange) {
-      onChange(form.getFieldsValue())
-    }
+    if (onChange == null) return
+    const newValues = form.getFieldsValue() as QuestionRadioPropsType
+    console.log(newValues, '====newValues===')
+
+    // if (newValues.options) {
+    //   // 需要清除text === undefined的选项
+    //   newValues.options = newValues.options.filter(opt => !(opt.text == null))
+    // }
+
+    const { options = [] } = newValues
+    options.forEach(opt => {
+      if (opt.value) return
+      opt.value = nanoid(5)
+    })
+
+    onChange(newValues)
   }
 
   return (
@@ -33,12 +47,36 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
           {(fields, { add, remove }) => (
             <>
               {/* 遍历所有的选项 */}
+              <Form.Item>
+                <Button
+                  type="link"
+                  onClick={() => add({ value: '', text: '' })}
+                  icon={<PlusOutlined />}
+                  block
+                >
+                  添加选项
+                </Button>
+              </Form.Item>
               {fields.map(({ key, name }, index) => {
                 return (
                   <Space key={key} align="baseline">
                     <Form.Item
                       name={[name, 'text']}
-                      rules={[{ required: true, message: '请输入选项文字' }]}
+                      rules={[
+                        { required: true, message: '请输入选项文字' },
+                        {
+                          validator: (_, text) => {
+                            const { options = [] } = form.getFieldsValue()
+                            let num = 0
+                            options.forEach((item: OptionType) => {
+                              if (item.text === text) num++
+                            })
+
+                            if (num === 1) return Promise.resolve()
+                            return Promise.reject(new Error('和其他选项重复了'))
+                          },
+                        },
+                      ]}
                     >
                       <Input placeholder="请输入选项文字" />
                     </Form.Item>
