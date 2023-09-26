@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dslate/antd": "^2.0.7",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -19,6 +20,8 @@
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "sass": "^1.62.0",
+    "slate": "^0.94.1",
+    "slate-react": "^0.99.0",
     "styled-components": "^5.3.9",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"

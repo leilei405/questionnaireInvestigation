@@ -6,6 +6,7 @@ import {
   ComponentPropsType,
 } from '../../../components/questionComponents'
 import { changeComponentProps } from '../../../store/componentReducer' // 修改组件属性
+
 const NoProp: FC = () => {
   return <div style={{ textAlign: 'center' }}>未选中组件</div>
 }

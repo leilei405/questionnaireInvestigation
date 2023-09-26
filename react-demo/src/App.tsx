@@ -18,7 +18,10 @@ import './App.css'
 // import { ReducerDemo } from './CountReducer/reducer'
 // import Count from './pages/countPage'
 // import TodoList from './pages/todoList'
-import RadioDemo from './Radio'
+// import RadioDemo from './Radio'
+// import DateDemo from './DateComponent'
+// import SlateCom from './SlateV1/index'
+import { SlateCom } from './SlateV2/index'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -43,7 +46,9 @@ function App() {
       {/* <TodoListReducer /> */}
       {/* <Count /> */}
       {/* <TodoList /> */}
-      <RadioDemo />
+      {/* <RadioDemo /> */}
+      {/* <DateDemo /> */}
+      <SlateCom />
     </div>
   )
 }
