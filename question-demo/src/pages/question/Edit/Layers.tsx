@@ -1,10 +1,16 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import { message, Input } from 'antd'
+import { message, Input, Button, Space } from 'antd'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
-import { changeSelectId, changeComponentTitle } from '../../../store/componentReducer'
+import {
+  changeSelectId,
+  changeComponentTitle,
+  toggleComponentLocked,
+  changeComponentHidden,
+} from '../../../store/componentReducer'
 import styles from './Layers.module.scss'
+import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
 const Layers: FC = () => {
   const { componentList, selectedId } = useGetComponentInfo()
   const dispatch = useDispatch()
@@ -37,6 +43,16 @@ const Layers: FC = () => {
     dispatch(changeComponentTitle({ fe_id: selectedId, title: newTitle }))
   }
 
+  // 切换 显示隐藏
+  const changeHidden = (fe_id: string, isHidden: boolean) => {
+    dispatch(changeComponentHidden({ fe_id, isHidden }))
+  }
+
+  // 切换 锁定解锁
+  const changeLocked = (fe_id: string) => {
+    dispatch(toggleComponentLocked({ fe_id }))
+  }
+
   return (
     <>
       {componentList.map(item => {
@@ -61,7 +77,26 @@ const Layers: FC = () => {
               )}
               {fe_id !== changedTitleId && title}
             </div>
-            <div className={styles.handler}>按钮</div>
+            <div className={styles.handler}>
+              <Space>
+                <Button
+                  size="small"
+                  shape="circle"
+                  className={!isHidden ? styles.btn : ''}
+                  icon={<EyeInvisibleOutlined />}
+                  type={isHidden ? 'primary' : 'text'}
+                  onClick={() => changeHidden(fe_id, !isHidden)}
+                />
+                <Button
+                  size="small"
+                  shape="circle"
+                  className={!isLocked ? styles.btn : ''}
+                  icon={<LockOutlined />}
+                  type={isLocked ? 'primary' : 'text'}
+                  onClick={() => changeLocked(fe_id)}
+                />
+              </Space>
+            </div>
           </div>
         )
       })}
