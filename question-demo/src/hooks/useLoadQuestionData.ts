@@ -5,6 +5,8 @@ import { useRequest } from 'ahooks'
 import { useDispatch } from 'react-redux'
 import { getQuestionServices } from '../services/question'
 import { resetComponents } from '../store/componentReducer'
+import { resetPageInfo } from '../store/pageInfoReducer'
+
 export const useLoadQuestionData = () => {
   const { id = '' } = useParams()
   const dispatch = useDispatch()
@@ -25,8 +27,8 @@ export const useLoadQuestionData = () => {
   // 根据获取的data 设置 redux store1
   useEffect(() => {
     if (!data) return
-    // const { title = '', componentList = [] } = data
-    const { componentList = [] } = data
+    const { title = '', componentList = [], desc = '', js = '', css = '' } = data
+    // const { componentList = [] } = data
     // 获取默认的 selectedId
     let selectedId = ''
     if (componentList.length > 0) {
@@ -34,6 +36,9 @@ export const useLoadQuestionData = () => {
     }
     // 把 componentList 存储到Redux store 中
     dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
+
+    // 把PageInfo 存储到redux store 中
+    dispatch(resetPageInfo({ title, desc, js, css }))
   }, [data])
 
   // 根据id变化, 监听 执行 ajax 加载问卷数据
