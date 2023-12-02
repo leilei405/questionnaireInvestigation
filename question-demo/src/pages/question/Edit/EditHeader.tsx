@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Space, Typography, Input } from 'antd'
 import { LeftOutlined, CheckOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons'
-import { useRequest, useKeyPress } from 'ahooks'
+import { useRequest, useKeyPress, useDebounceEffect } from 'ahooks'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import styles from './EditHeader.module.scss'
@@ -70,6 +70,17 @@ const SaveButton: FC = () => {
     event.preventDefault() // 阻止默认行为
     if (!loading) save()
   })
+
+  // 自动保存 监听内容变化, 注意!!! 不是定期保存
+
+  useDebounceEffect(
+    () => {
+      save()
+    },
+    [componentList, pageInfo],
+    { wait: 1000 }
+  )
+
   return (
     <Button
       onClick={save}
