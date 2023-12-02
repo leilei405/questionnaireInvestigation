@@ -4,7 +4,7 @@ module.exports = {
   // 括号内部不要出现空格
   bracketSpacing: true,
   // 行结束符使用 Unix 格式
-  endOfLine: 'lf',
+  // endOfLine: 'lf',
   // true: Put > on the last line instead of at a new line
   jsxBracketSameLine: false,
   // 行宽
@@ -22,4 +22,5 @@ module.exports = {
   // 后置逗号，多行对象、数组在最后一行增加逗号
   trailingComma: 'es5',
   parser: 'typescript',
+  endOfLine: 'auto',
 }
