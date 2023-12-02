@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import produce from 'immer'
 export type PageInfoType = {
   title: string
   desc?: string
@@ -20,9 +21,14 @@ const PageInfoSlice = createSlice({
     resetPageInfo: (state: PageInfoType, action: PayloadAction<PageInfoType>) => {
       return action.payload
     },
+
+    // 修改标题
+    changePageTitle: produce((draft: PageInfoType, action: PayloadAction<string>) => {
+      draft.title = action.payload
+    }),
   },
 })
 
-export const { resetPageInfo } = PageInfoSlice.actions
+export const { resetPageInfo, changePageTitle } = PageInfoSlice.actions
 
 export default PageInfoSlice.reducer
