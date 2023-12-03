@@ -21,7 +21,8 @@ import './App.css'
 // import RadioDemo from './Radio'
 // import DateDemo from './DateComponent'
 // import SlateCom from './SlateV1/index'
-import { SlateCom } from './SlateV2/index'
+// import { SlateCom } from './SlateV2/index'
+import Container from './sortContainer'
 function App() {
   // useTitle('我爱你')
   // const { x, y } = useMouse()
@@ -48,7 +49,8 @@ function App() {
       {/* <TodoList /> */}
       {/* <RadioDemo /> */}
       {/* <DateDemo /> */}
-      <SlateCom />
+      {/* <SlateCom /> */}
+      <Container />
     </div>
   )
 }
