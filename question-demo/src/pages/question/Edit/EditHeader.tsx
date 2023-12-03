@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Space, Typography, Input } from 'antd'
+import { Button, Space, Typography, Input, message } from 'antd'
 import { LeftOutlined, CheckOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { useRequest, useKeyPress, useDebounceEffect } from 'ahooks'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
@@ -62,6 +62,12 @@ const SaveButton: FC = () => {
     },
     {
       manual: true,
+      onSuccess() {
+        message.success('保存成功')
+      },
+      onError() {
+        message.error('保存失败')
+      },
     }
   )
 
@@ -85,9 +91,42 @@ const SaveButton: FC = () => {
     <Button
       onClick={save}
       disabled={loading}
+      type="link"
       icon={loading ? <LoadingOutlined /> : <CheckOutlined />}
     >
       保存
+    </Button>
+  )
+}
+
+// 发布按钮组件
+const PublishButton = () => {
+  const nav = useNavigate()
+  const { id } = useParams()
+  const { componentList } = useGetComponentInfo() // 获取组件列表信息
+  const pageInfo = useGetPageInfo() // 获取页面信息
+
+  // 发布问卷信息
+  const { loading, run: published } = useRequest(
+    async () => {
+      if (!id) return
+      await updateQuestionServices(id, { ...pageInfo, componentList, isPublished: true })
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('发布成功')
+        nav('/question/stat/' + id) // 发布成功, 跳转到统计页面
+      },
+      onError() {
+        message.error('发布失败')
+      },
+    }
+  )
+
+  return (
+    <Button onClick={published} disabled={loading} type="primary">
+      发布
     </Button>
   )
 }
@@ -112,7 +151,7 @@ const EditHeader: FC = () => {
         <div className={styles.right}>
           <Space>
             <SaveButton />
-            <Button type="primary">发布</Button>
+            <PublishButton />
           </Space>
         </div>
       </div>
