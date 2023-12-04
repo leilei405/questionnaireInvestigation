@@ -3,11 +3,12 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
 type PropsType = {
+  title: string
   id: string
 }
 
 const SortableItem: FC<PropsType> = (props: PropsType) => {
-  const { id } = props
+  const { title, id } = props
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
 
   const style = {
@@ -21,7 +22,7 @@ const SortableItem: FC<PropsType> = (props: PropsType) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      Item {id}
+      Item {id} ==== {title}
     </div>
   )
 }
