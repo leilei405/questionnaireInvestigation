@@ -12,6 +12,8 @@ import {
   RollbackOutlined,
   RedoOutlined,
   UnlockTwoTone,
+  DownCircleFilled,
+  UpCircleFilled,
 } from '@ant-design/icons'
 import {
   changeComponentHidden,
@@ -19,12 +21,18 @@ import {
   pasteCopiedComponent,
   removeSelectedComponent,
   toggleComponentLocked,
+  moveComponent,
 } from '../../../store/componentReducer'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 const EditToolbar: FC = () => {
   const dispatch = useDispatch()
-  const { selectedId, selectedComponent, copiedComponent } = useGetComponentInfo()
+  const { selectedId, componentList, selectedComponent, copiedComponent } = useGetComponentInfo()
   const { isLocked } = selectedComponent || {}
+  // 判断是不是第一个  是就不用上移了
+  const length = componentList.length
+  const selectedIndex = componentList.findIndex(c => c.fe_id === selectedId)
+  const isFirst = selectedIndex <= 0
+  const isLast = selectedIndex + 1 >= length
   // 删除选中组件
   const handleCLickDelete = () => {
     dispatch(removeSelectedComponent())
@@ -49,6 +57,19 @@ const EditToolbar: FC = () => {
   const paste = () => {
     dispatch(pasteCopiedComponent())
   }
+
+  // 上移组件
+  const handleKeyUp = () => {
+    if (isFirst) return
+    dispatch(moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex - 1 }))
+  }
+
+  // 下移组件
+  const handleKeyDown = () => {
+    if (isLast) return
+    dispatch(moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex + 1 }))
+  }
+
   return (
     <Space>
       <Tooltip title="删除组件">
@@ -75,11 +96,21 @@ const EditToolbar: FC = () => {
           icon={<FileAddTwoTone />}
         ></Button>
       </Tooltip>
-      <Tooltip title="上移组件">
-        <Button shape="circle" icon={<UpCircleTwoTone />}></Button>
+      <Tooltip title={!isFirst ? '上移组件' : <span style={{ color: 'red' }}>已经是第一个了</span>}>
+        <Button
+          shape="circle"
+          icon={!isFirst ? <UpCircleTwoTone /> : <DownCircleFilled />}
+          onClick={handleKeyUp}
+          disabled={isFirst}
+        />
       </Tooltip>
-      <Tooltip title="下移组件">
-        <Button shape="circle" icon={<DownCircleTwoTone />}></Button>
+      <Tooltip title={!isLast ? '下移组件' : <span style={{ color: 'red' }}>已经是最后一个</span>}>
+        <Button
+          shape="circle"
+          icon={!isLast ? <DownCircleTwoTone /> : <UpCircleFilled />}
+          onClick={handleKeyDown}
+          disabled={isLast}
+        />
       </Tooltip>
       <Tooltip title="撤销">
         <Button

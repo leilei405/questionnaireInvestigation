@@ -13,7 +13,12 @@ const isActiveElementValid = () => {
   const activeElem = document.activeElement
 
   // 等于document.body 说明在画布上  不在其他地方1
+  // 没有增加dnd-kit 之前
+  // if (activeElem === document.body) return true
+
+  // 增加了dnd-kit之后
   if (activeElem === document.body) return true
+  if (activeElem?.matches('div[role="button"]')) return true
 
   return false
 }
