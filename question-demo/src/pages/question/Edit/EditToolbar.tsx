@@ -15,6 +15,7 @@ import {
   DownCircleFilled,
   UpCircleFilled,
 } from '@ant-design/icons'
+import { ActionCreators } from 'redux-undo'
 import {
   changeComponentHidden,
   copySelectedIdComponent,
@@ -70,23 +71,31 @@ const EditToolbar: FC = () => {
     dispatch(moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex + 1 }))
   }
 
+  // 撤销回到上一步  最多撤销20步
+  const onUndo = () => {
+    dispatch(ActionCreators.undo())
+  }
+  // 重做
+  const onRedo = () => {
+    dispatch(ActionCreators.redo())
+  }
   return (
     <Space>
       <Tooltip title="删除组件">
-        <Button onClick={handleCLickDelete} shape="circle" icon={<DeleteTwoTone />}></Button>
+        <Button onClick={handleCLickDelete} shape="circle" icon={<DeleteTwoTone />} />
       </Tooltip>
       <Tooltip title="隐藏组件">
-        <Button onClick={handleHidden} shape="circle" icon={<EyeInvisibleTwoTone />}></Button>
+        <Button onClick={handleHidden} shape="circle" icon={<EyeInvisibleTwoTone />} />
       </Tooltip>
       <Tooltip title="锁定组件">
         <Button
           onClick={handleLock}
           shape="circle"
           icon={isLocked ? <LockTwoTone /> : <UnlockTwoTone />}
-        ></Button>
+        />
       </Tooltip>
       <Tooltip title="复制组件">
-        <Button onClick={copy} shape="circle" icon={<CopyTwoTone />}></Button>
+        <Button onClick={copy} shape="circle" icon={<CopyTwoTone />} />
       </Tooltip>
       <Tooltip title="粘贴组件">
         <Button
@@ -94,7 +103,7 @@ const EditToolbar: FC = () => {
           disabled={copiedComponent == null}
           shape="circle"
           icon={<FileAddTwoTone />}
-        ></Button>
+        />
       </Tooltip>
       <Tooltip title={!isFirst ? '上移组件' : <span style={{ color: 'red' }}>已经是第一个了</span>}>
         <Button
@@ -116,13 +125,15 @@ const EditToolbar: FC = () => {
         <Button
           shape="circle"
           icon={<RollbackOutlined style={{ color: 'rgb(24, 144, 255)' }} />}
-        ></Button>
+          onClick={onUndo}
+        />
       </Tooltip>
       <Tooltip title="重做">
         <Button
           shape="circle"
           icon={<RedoOutlined style={{ color: 'rgb(24, 144, 255)' }} />}
-        ></Button>
+          onClick={onRedo}
+        />
       </Tooltip>
     </Space>
   )
