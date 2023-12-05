@@ -17,7 +17,7 @@ import './App.css'
 // import { Demo } from './ContextDemo/index'
 // import { ReducerDemo } from './CountReducer/reducer'
 // import Count from './pages/countPage'
-// import TodoList from './pages/todoList'
+import TodoList from './pages/todoList'
 // import RadioDemo from './Radio'
 // import DateDemo from './DateComponent'
 // import SlateCom from './SlateV1/index'
@@ -46,11 +46,11 @@ function App() {
       {/* <ReducerDemo /> */}
       {/* <TodoListReducer /> */}
       {/* <Count /> */}
-      {/* <TodoList /> */}
+      <TodoList />
       {/* <RadioDemo /> */}
       {/* <DateDemo /> */}
       {/* <SlateCom /> */}
-      <Container />
+      {/* <Container /> */}
     </div>
   )
 }
