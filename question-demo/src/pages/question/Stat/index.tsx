@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Spin, Result, Button } from 'antd'
 import { useTitle } from 'ahooks'
@@ -6,12 +6,15 @@ import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import styles from './index.module.scss'
 import StatHeader from './StatHeader'
+import ComponentList from './ComponentList'
 export const Stat: FC = () => {
   const nav = useNavigate()
-
-  // 获取问卷详情
   const { loading } = useLoadQuestionData()
   const { isPublished, title } = useGetPageInfo()
+
+  // 状态提升 selectedId type
+  const [selectedComponentId, setSelectedComponentId] = useState('')
+  const [selectedComponentType, setSelectedComponentType] = useState('')
 
   // 修改标题
   useTitle(`问卷编辑 ${title}`)
@@ -45,7 +48,13 @@ export const Stat: FC = () => {
     }
     return (
       <>
-        <div className={styles.left}>left</div>
+        <div className={styles.left}>
+          <ComponentList
+            selectedComponentId={selectedComponentId}
+            setSelectedComponentId={setSelectedComponentId}
+            setSelectedComponentType={setSelectedComponentType}
+          />
+        </div>
         <div className={styles.main}>main</div>
         <div className={styles.right}>right</div>
       </>
