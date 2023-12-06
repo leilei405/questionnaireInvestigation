@@ -7,11 +7,7 @@ import {
   MouseSensor,
   DragEndEvent,
 } from '@dnd-kit/core'
-import {
-  //   arrayMove,
-  SortableContext,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 type PropsType = {
   children: JSX.Element | JSX.Element[]
@@ -36,7 +32,6 @@ const SortContainer: FC<PropsType> = (props: PropsType) => {
     if (active.id !== over.id) {
       const oldIndex = items.findIndex(c => c.fe_id === active.id)
       const newIndex = items.findIndex(c => c.fe_id === over.id)
-      console.log(oldIndex, newIndex, '=======')
       onDragEnd(oldIndex, newIndex)
     }
   }
