@@ -1,21 +1,28 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
+import { useTitle } from 'ahooks'
 import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
 import styles from './index.module.scss'
 import { EditCanvas } from './EditCanvas'
 import { changeSelectId } from '../../../store/componentReducer'
 import LeftComponentPanel from './LeftPanel' // 左边组件,图层
 import RightComponentPanel from './RightPanel' // 右边属性设置
+import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import EditHeader from './EditHeader'
 const Edit: FC = () => {
   // 获取问卷详情 test
   const { loading } = useLoadQuestionData()
   const dispatch = useDispatch()
 
+  // 修改标题
+  const { title } = useGetPageInfo()
+  useTitle(`问卷统计 ${title}`)
+
   // 点击空白处取消选中
   const clearSelectedId = () => {
     dispatch(changeSelectId(''))
   }
+
   return (
     <div className={styles.container}>
       {/* 顶部 */}
