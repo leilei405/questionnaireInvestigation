@@ -1,6 +1,6 @@
 /**
  * @description  MOCK 列表数据
- * @author 雷雷
+ * @author 冯雷雷
  */
 
 const Mock = require('mockjs')
