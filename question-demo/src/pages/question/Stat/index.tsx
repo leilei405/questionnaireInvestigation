@@ -70,7 +70,7 @@ export const Stat: FC = () => {
 
   return (
     <div className={styles.container}>
-      <StatHeader />
+      {!loading && <StatHeader />}
       <div className={styles['content-wrapper']}>
         {loading && <RenderLoading />}
         {!loading && (
