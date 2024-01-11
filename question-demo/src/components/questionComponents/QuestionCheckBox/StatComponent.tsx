@@ -16,6 +16,7 @@ export const StatComponent: FC<QuestionCheckBoxStatPropsType> = (
   props: QuestionCheckBoxStatPropsType
 ) => {
   const { stat = [] } = props
+  // test
   return (
     <div style={{ width: '400px', height: '300px' }}>
       <ResponsiveContainer width="100%" height="100%">
