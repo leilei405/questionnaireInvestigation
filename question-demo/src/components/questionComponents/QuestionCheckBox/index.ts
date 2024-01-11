@@ -5,6 +5,7 @@
 
 import { QuestionCheckBox } from './ComponentCheckBox'
 import { QuestionCheckBoxDefaultProps } from './checkType'
+import { StatComponent } from './StatComponent'
 import PropComponent from './PropComponent'
 export * from './checkType'
 
@@ -15,4 +16,5 @@ export default {
   Component: QuestionCheckBox, // 画布显示组件
   PropComponent, // 修改属性
   defaultProps: QuestionCheckBoxDefaultProps,
+  StatComponent, // 柱状统计组件
 }

@@ -8,8 +8,7 @@ import { useRequest } from 'ahooks'
 
 import { getComponentStatService } from '../../../services/stat'
 
-import PieDemo from './PieDemo'
-import BarCharts from './BarChart'
+import { getComponentConfigByType } from '../../../components/questionComponents'
 
 const { Title } = Typography
 
@@ -20,8 +19,6 @@ type PropsType = {
 
 const ChartStat: FC<PropsType> = (props: PropsType) => {
   const { selectedComponentId, selectedComponentType } = props
-  console.log('selectedComponentId', selectedComponentId)
-  console.log('selectedComponentType', selectedComponentType)
 
   const [data, setData] = useState([])
 
@@ -32,26 +29,27 @@ const ChartStat: FC<PropsType> = (props: PropsType) => {
     {
       manual: false, // true 手动触发
       onSuccess(res) {
-        console.log(res, '=====')
-
         setData(res.stat)
       },
     }
   )
 
-  console.log(data, '===data==')
-
   useEffect(() => {
     if (selectedComponentId) run(id, selectedComponentId)
   }, [selectedComponentId])
 
+  // 生成统计图表
+  function getStatElem() {
+    if (!selectedComponentId) return <div>未选中组件</div>
+    const { StatComponent } = getComponentConfigByType(selectedComponentType) || {}
+    if (StatComponent == null) return <div>该组件无统计图表</div>
+    return <StatComponent stat={data} />
+  }
+
   return (
     <>
       <Title level={4}>问卷统计</Title>
-      <div>
-        <PieDemo />
-        <BarCharts />
-      </div>
+      <div>{getStatElem()}</div>
     </>
   )
 }

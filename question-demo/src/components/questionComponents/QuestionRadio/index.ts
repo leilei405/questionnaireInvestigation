@@ -4,6 +4,7 @@
  */
 
 import { QuestionRadio } from './ComponentRadio'
+import { StatComponent } from './StatComponent'
 import { QuestionRadioDefaultProps } from './radioType'
 import PropComponent from './PropComponent'
 export * from './radioType'
@@ -15,4 +16,5 @@ export default {
   Component: QuestionRadio, // 画布显示组件
   PropComponent, // 修改属性
   defaultProps: QuestionRadioDefaultProps,
+  StatComponent,
 }
