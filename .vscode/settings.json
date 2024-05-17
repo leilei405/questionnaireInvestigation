@@ -15,7 +15,10 @@
         "qrcode",
         "reduxjs",
         "undoable",
-        "uparrow"
+        "uparrow",
+        "TTFB"
     ],
-    "vue.features.codeActions.enable": false
+    // "editor.codeActionsOnSave": {
+    //     "source.fixAll.eslint": "explicit"
+    // },
 }
