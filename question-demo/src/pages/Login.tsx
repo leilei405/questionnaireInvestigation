@@ -13,37 +13,49 @@ import {
 } from '../utils/rememberInfo'
 import { LoginType } from '../types/LoginRegister'
 import { loginServices } from '../services/user'
+
 export const Login: FC = () => {
   const { Title } = Typography
   const [form] = Form.useForm() // 第三方hook
   const nav = useNavigate()
+
+  const { run } = useRequest(
+    async (username: string, password: string) => {
+      return await loginServices({ username, password })
+    },
+    {
+      manual: true,
+      onSuccess: result => {
+        const { token = '' } = result
+        if (!token) {
+          message.error('登录失败')
+        }
+        // 存储设置token
+        setToken(token)
+        message.success('登录成功')
+        nav(MANAGE_INDEX_PATHNAME) // 跳转到我的问卷
+      },
+    }
+  )
+
   /**
    * @method onFinish
    * @param values
    * @description 登录账号
    */
-  const { run } = useRequest(async values => await loginServices({ ...values }), {
-    manual: true,
-    onSuccess: result => {
-      const { token = '' } = result
-      // 存储设置token
-      setToken(token)
-      message.success('登录成功')
-      nav(MANAGE_INDEX_PATHNAME) // 跳转到我的问卷
-    },
-  })
-
   const onFinish = (values: LoginType) => {
     const { username, password, remember } = values
-    run(values)
+    run(username, password)
     if (remember) {
       rememberUser(username, password)
     } else {
       deleteUserForm()
     }
   }
+
   useEffect(() => {
     const { username, password } = getUserInfoFormStorage()
+    console.log(username, password)
     form.setFieldsValue({ username, password })
   }, [])
 

@@ -6,7 +6,6 @@ import { BarsOutlined, PlusOutlined, StarOutlined, DeleteOutlined } from '@ant-d
 import { createQuestionServices } from '../services/question'
 import styles from './ManageLayout.module.scss'
 const ManageLayout: FC = () => {
-  // const [loading, setLoading] = useState(false)
   const nav = useNavigate()
   const { pathname } = useLocation()
 

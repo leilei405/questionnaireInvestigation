@@ -11,11 +11,6 @@ import { registerServices } from '../services/user'
 const Register: FC = () => {
   const { Title } = Typography
   const nav = useNavigate()
-  /**
-   * @method onFinish
-   * @param values
-   * @description 注册账号
-   */
 
   const { run } = useRequest(async values => await registerServices({ ...values }), {
     manual: true,
@@ -25,6 +20,11 @@ const Register: FC = () => {
     },
   })
 
+  /**
+   * @method onFinish
+   * @param values
+   * @description 注册账号
+   */
   const onFinish = (values: LoginType) => {
     run(values)
   }

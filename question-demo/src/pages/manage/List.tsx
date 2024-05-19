@@ -8,35 +8,11 @@ import ListSearch from '../../components/ListSearch'
 import { QuestionCard } from '../../components/QuestionCard'
 import { queryQuestionListServices } from '../../services/question'
 import { LIST_PAGE_SIZE, LIST_SEARCH_PARAM_KEY } from '../../constant'
-// import { useLoadQuestionList } from '../../hooks/useLoadQuestionList'
+
 const { Title } = Typography
 
 const List: FC = () => {
-  useTitle('Amorous - 我的问卷')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [searchParams, setSearchParams] = useSearchParams()
-  // console.log('keywords', searchParams.get('keyword')) // 字符串
-  // console.log('keywordsAll', searchParams.getAll('keyword')) // 数组
-
-  // 获取列表数据 普通版 Ajax
-  // const [questionList, setQuestionList] = useState([])
-  // const [total, setTotal] = useState(0)
-  // const queryQuestionList = async () => {
-  //   const data = await queryQuestionListServices()
-  //   const { list = [], total = 0 } = data
-  //   setQuestionList(list)
-  //   setTotal(total)
-  // }
-
-  // 获取列表数据 useRequest版
-  // const { data = {}, loading } = useRequest(queryQuestionListServices)
-
-  // 自定义hook 版本
-  // const { data = {}, loading } = useLoadQuestionList()
-  // const { list = [], total = 0 } = data
-  // useEffect(() => {
-  //   queryQuestionList()
-  // }, [])
+  useTitle('Luck - 我的问卷')
 
   // 下滑加载更多
   const [started, setStarted] = useState(false) // 是否已经开始加载(防抖,有延迟时间)
@@ -44,16 +20,10 @@ const List: FC = () => {
   const [list, setList] = useState([]) // 全部的列表数据,上划加载更多,累计
   const [total, setTotal] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-  // const [loading, setLoading] = useState(false)
   const [searchParams] = useSearchParams() // url参数, 虽然没有page - pageSize 但是有keyword
 
   // 判断上划之后还是否有数据
   const haveMoreData = total > list.length
-
-  // 触发加载
-  // const tryLoadMore = () => {
-  //   console.log('LoadMore')
-  // }
 
   // 监听keyword  重置信息
   const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
@@ -78,7 +48,7 @@ const List: FC = () => {
       manual: true,
       onSuccess: result => {
         const { total = 0, list: listData = [] } = result
-        setList(list.concat(listData)) // 累计
+        setList(list.concat(listData)) // 每加载一次进行累加
         setTotal(total)
         setPage(page + 1)
       },
@@ -104,7 +74,7 @@ const List: FC = () => {
     }
   )
 
-  // 当页面加载或者URL参数(keyword)改变时候  触发加载
+  // URL参数(keyword)改变时候
   useEffect(() => {
     tryLoadMore()
   }, [searchParams])
@@ -115,17 +85,23 @@ const List: FC = () => {
       window.addEventListener('scroll', tryLoadMore)
     }
     return () => {
-      // searchParams 变化之前解绑事件
-      window.removeEventListener('scroll', tryLoadMore) // 解绑事件
+      window.removeEventListener('scroll', tryLoadMore)
     }
   }, [searchParams, haveMoreData])
 
   // 使用useMemo缓存
   const LoadMoreContentElem = useMemo(() => {
-    if (!started || loading) return <Spin />
-    if (total === 0) return <Empty description="暂无数据" />
-    if (!haveMoreData) return <span>....没有更多了</span>
-    return <span>开始加载下一页</span>
+    // 没有开始或者加载中 就不显示
+    if (!started || loading) {
+      return <Spin />
+    }
+    if (total === 0) {
+      return <Empty description="暂无数据" />
+    }
+    if (!haveMoreData) {
+      return <span>....没有更多了</span>
+    }
+    return <span>加载更多......</span>
   }, [started, loading, haveMoreData])
 
   return (
@@ -139,12 +115,6 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {/* <div style={{ height: '2000px' }}></div> */}
-        {/* {loading && (
-          <div style={{ textAlign: 'center' }}>
-            <Spin />
-          </div>
-        )} */}
         {list.length > 0 &&
           list.map((question: any) => {
             const { _id } = question
@@ -152,10 +122,7 @@ const List: FC = () => {
           })}
       </div>
       <div className={styles.footer}>
-        <div ref={containerRef}>
-          {/* <LoadMoreContentElem /> */}
-          {LoadMoreContentElem}
-        </div>
+        <div ref={containerRef}>{LoadMoreContentElem}</div>
       </div>
     </>
   )

@@ -33,12 +33,14 @@ const ListSearch: FC = () => {
   return (
     <div>
       <Search
+        size="large"
         value={keyWords}
         allowClear
         onChange={handleChange}
         onSearch={handleSearch}
         style={{ width: '300px' }}
         placeholder="输入关键字"
+        enterButton
       />
     </div>
   )

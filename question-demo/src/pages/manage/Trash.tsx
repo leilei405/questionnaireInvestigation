@@ -4,7 +4,6 @@ import { Table, Empty, Typography, Tag, Button, Space, Spin, message, Modal } fr
 import { useTitle, useRequest } from 'ahooks'
 import styles from './common.module.scss'
 import ListSearch from '../../components/ListSearch'
-// import { QuestionCard } from '../../components/QuestionCard'
 import { useLoadQuestionList } from '../../hooks/useLoadQuestionListData'
 import { ListPage } from '../../components/ListPage'
 import { deleteQuestionServices, updateQuestionServices } from '../../services/question'
@@ -92,6 +91,8 @@ const Trash: FC = () => {
 
   const delConfirm = () => {
     confirm({
+      okText: '确认',
+      cancelText: '取消',
       title: '确认彻底删除该问卷？',
       icon: <ExclamationCircleOutlined />,
       content: '删除以后不可以找回',
@@ -136,7 +137,7 @@ const Trash: FC = () => {
             pagination={false}
             columns={columns}
             dataSource={list}
-            rowKey="_id"
+            rowKey={k => k._id}
           />
         )}
       </div>

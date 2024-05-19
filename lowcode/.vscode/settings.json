@@ -1,0 +1,25 @@
+{
+    "cSpell.words": [
+        "ahooks",
+        "antd",
+        "Appstore",
+        "commitlint",
+        "craco",
+        "ctitle",
+        "datetime",
+        "downarrow",
+        "dslate",
+        "immer",
+        "mockjs",
+        "Popconfirm",
+        "qrcode",
+        "reduxjs",
+        "undoable",
+        "uparrow",
+        "TTFB",
+        "lowcode"
+    ],
+    // "editor.codeActionsOnSave": {
+    //     "source.fixAll.eslint": "explicit"
+    // },
+}
