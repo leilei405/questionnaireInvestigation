@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { Input, Form, Select, Checkbox } from 'antd'
-import { QuestionTitlePropsType } from './titleType'
+import { QuestionTitlePropsType } from './type'
 
 // 层级配置
 const options = [

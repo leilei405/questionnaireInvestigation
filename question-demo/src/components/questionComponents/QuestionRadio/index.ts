@@ -3,11 +3,11 @@
  * @author Amorous
  */
 
-import { QuestionRadio } from './ComponentRadio'
+import { QuestionRadio } from './Component'
 import { StatComponent } from './StatComponent'
-import { QuestionRadioDefaultProps } from './radioType'
+import { QuestionRadioDefaultProps } from './type'
 import PropComponent from './PropComponent'
-export * from './radioType'
+export * from './type'
 
 // Radio 组件配置
 export default {

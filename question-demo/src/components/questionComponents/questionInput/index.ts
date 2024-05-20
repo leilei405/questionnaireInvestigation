@@ -3,10 +3,10 @@
  * @author Amorous
  */
 
-import { QuestionInput } from './ComponentsInput'
-import { QuestionInputDefaultProps } from './inputType'
+import { QuestionInput } from './Component'
+import { QuestionInputDefaultProps } from './type'
 import PropComponent from './PropComponent'
-export * from './inputType'
+export * from './type'
 
 // Input 组件配置
 export default {

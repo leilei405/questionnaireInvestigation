@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Radio, Typography, Space } from 'antd'
-import { QuestionRadioDefaultProps, QuestionRadioPropsType } from './radioType'
+import { QuestionRadioDefaultProps, QuestionRadioPropsType } from './type'
 
 const { Paragraph } = Typography
 

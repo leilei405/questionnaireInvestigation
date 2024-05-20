@@ -3,10 +3,10 @@
  * @author Amorous
  */
 
-import { QuestionTextArea } from './ComponentTextArea'
-import { QuestionTextAreaDefaultProps } from './textAreaType'
+import { QuestionTextArea } from './Component'
+import { QuestionTextAreaDefaultProps } from './type'
 import PropComponent from './PropComponent'
-export * from './textAreaType'
+export * from './type'
 
 // TextArea 组件配置
 export default {

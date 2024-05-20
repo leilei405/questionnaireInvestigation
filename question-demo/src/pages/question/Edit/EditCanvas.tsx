@@ -25,7 +25,7 @@ function genComponent(componentInfo: ComponentInfoType) {
   return <Component {...props} />
 }
 
-export const EditCanvas: FC<PropsType> = ({ loading }) => {
+const EditCanvas: FC<PropsType> = ({ loading }) => {
   const { componentList, selectedId } = useGetComponentInfo()
   // console.log(componentList, '服务端Mock的数据')
   const dispatch = useDispatch()
@@ -98,3 +98,5 @@ export const EditCanvas: FC<PropsType> = ({ loading }) => {
     </SortContainer>
   )
 }
+
+export default EditCanvas

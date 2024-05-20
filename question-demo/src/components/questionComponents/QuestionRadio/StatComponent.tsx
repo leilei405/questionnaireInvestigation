@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react'
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
-import { QuestionRadioStatPropsType } from './radioType'
+import { QuestionRadioStatPropsType } from './type'
 
 const colorsArr = ['red', 'green', 'blue', 'magenta', 'cyan', 'white']
 

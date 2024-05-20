@@ -5,6 +5,7 @@ import { getQuestionServices } from '../services/user'
 import { userGetUserInfo } from './userGetUserInfo'
 import { loginReducer } from '../store/userReducer'
 
+// 加载用户信息  并且存储到redux中
 export const useLoadUserData = () => {
   const dispatch = useDispatch()
   const [waitUserData, setWaitUserData] = useState(true)

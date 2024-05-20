@@ -15,6 +15,11 @@ type PropsType = {
   onDragEnd: (oldIndex: number, newIndex: number) => void
 }
 
+/**
+ * 排序容器组件
+ * @param props 组件属性
+ * @returns 渲染后的组件实例
+ */
 const SortContainer: FC<PropsType> = (props: PropsType) => {
   const { children, items, onDragEnd } = props
 
@@ -26,6 +31,11 @@ const SortContainer: FC<PropsType> = (props: PropsType) => {
     })
   )
 
+  /**
+   * 处理拖拽结束事件
+   * @param event 拖拽结束事件对象
+   * @returns 无返回值
+   */
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
     if (over == null) return

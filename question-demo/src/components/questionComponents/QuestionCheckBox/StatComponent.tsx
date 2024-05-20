@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-import { QuestionCheckBoxStatPropsType } from './checkType'
+import { QuestionCheckBoxStatPropsType } from './type'
 
 export const StatComponent: FC<QuestionCheckBoxStatPropsType> = (
   props: QuestionCheckBoxStatPropsType

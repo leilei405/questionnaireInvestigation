@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Checkbox, Typography, Space } from 'antd'
-import { QuestionCheckBoxDefaultProps, QuestionCheckBoxPropsType } from './checkType'
+import { QuestionCheckBoxDefaultProps, QuestionCheckBoxPropsType } from './type'
 
 const { Paragraph } = Typography
 

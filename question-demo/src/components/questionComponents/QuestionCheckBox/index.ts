@@ -3,11 +3,11 @@
  * @author Amorous
  */
 
-import { QuestionCheckBox } from './ComponentCheckBox'
-import { QuestionCheckBoxDefaultProps } from './checkType'
+import { QuestionCheckBox } from './Component'
+import { QuestionCheckBoxDefaultProps } from './type'
 import { StatComponent } from './StatComponent'
 import PropComponent from './PropComponent'
-export * from './checkType'
+export * from './type'
 
 // CheckBox 组件配置
 export default {

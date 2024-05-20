@@ -3,10 +3,10 @@
  * @author Amorous
  */
 
-import { QuestionTitle } from './ComponentsTitle'
-import { QuestionTitleDefaultProps } from './titleType'
+import { QuestionTitle } from './Components'
+import { QuestionTitleDefaultProps } from './type'
 import PropComponent from './PropComponent'
-export * from './titleType'
+export * from './type'
 
 // Title 的组件配置
 export default {

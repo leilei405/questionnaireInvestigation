@@ -3,10 +3,10 @@
  * @author Amorous
  */
 
-import { QuestionInfo } from './ComponentInfo'
-import { QuestionInfoDefaultProps } from './InfoType'
+import { QuestionInfo } from './Component'
+import { QuestionInfoDefaultProps } from './type'
 import PropComponent from './PropComponent'
-export * from './InfoType'
+export * from './type'
 
 // Info 组件配置
 export default {

@@ -3,12 +3,12 @@
  * @author Amorous
  */
 
-import ComponentParagraph from './ComponentParagraph'
-import { QuestionParagraphDefaultProps } from './paragraphType'
+import ComponentParagraph from './Component'
+import { QuestionParagraphDefaultProps } from './type'
 
 import PropComponent from './PropComponent'
 
-export * from './paragraphType'
+export * from './type'
 
 // Paragraph 组件配置
 export default {

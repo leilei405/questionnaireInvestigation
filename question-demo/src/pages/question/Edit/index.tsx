@@ -2,13 +2,15 @@ import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTitle } from 'ahooks'
 import { useLoadQuestionData } from '../../../hooks/useLoadQuestionData'
-import styles from './index.module.scss'
-import { EditCanvas } from './EditCanvas'
 import { changeSelectId } from '../../../store/componentReducer'
+// 组件
+import EditHeader from './EditHeader' // 顶部
 import LeftComponentPanel from './LeftPanel' // 左边组件,图层
+import EditCanvas from './EditCanvas' // 中间画布
 import RightComponentPanel from './RightPanel' // 右边属性设置
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
-import EditHeader from './EditHeader'
+// 样式
+import styles from './index.module.scss'
 const Edit: FC = () => {
   // 获取问卷详情 test
   const { loading } = useLoadQuestionData()

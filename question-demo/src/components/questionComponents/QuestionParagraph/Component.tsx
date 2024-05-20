@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
-import { QuestionParagraphDefaultProps, QuestionParagraphPropsType } from './paragraphType'
+import { QuestionParagraphDefaultProps, QuestionParagraphPropsType } from './type'
 
 const { Paragraph } = Typography
 
