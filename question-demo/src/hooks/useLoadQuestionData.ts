@@ -19,12 +19,11 @@ export const useLoadQuestionData = () => {
       return data
     },
     {
-      // 手动的
       manual: true,
     }
   )
 
-  // 根据获取的data 设置 redux store1
+  // 根据获取的data 设置 redux store
   useEffect(() => {
     if (!data) return
     const {
@@ -35,12 +34,13 @@ export const useLoadQuestionData = () => {
       css = '',
       isPublished = false,
     } = data
-    // const { componentList = [] } = data
+
     // 获取默认的 selectedId
     let selectedId = ''
     if (componentList.length > 0) {
       selectedId = componentList[0].fe_id // 默认选中第一个组件
     }
+
     // 把 componentList 存储到Redux store 中
     dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
 

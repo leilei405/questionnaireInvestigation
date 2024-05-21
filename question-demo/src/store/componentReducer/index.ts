@@ -3,6 +3,7 @@ import produce from 'immer'
 import { nanoid } from 'nanoid'
 import { cloneDeep } from 'lodash'
 import { arrayMove } from '@dnd-kit/sortable'
+
 import { ComponentPropsType } from '../../components/questionComponents'
 import { getNextSelectedId, insertNewComponent } from './utils'
 // 定义每个组件的类型

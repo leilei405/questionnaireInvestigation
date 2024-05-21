@@ -13,10 +13,12 @@ const NoProp: FC = () => {
 
 const ComponentProp: FC = () => {
   const dispatch = useDispatch()
-  // 在redux中获取信息
+  // 在redux中获取信息  判断是否选中组件
   const { selectedComponent } = useGetComponentInfo()
   if (selectedComponent == null) return <NoProp />
+
   const { type, props, isLocked, isHidden } = selectedComponent
+
   // 通过type 获取组件配置
   const componentConfig = getComponentConfigByType(type)
   if (componentConfig == null) return <NoProp />
@@ -24,13 +26,13 @@ const ComponentProp: FC = () => {
   const { PropComponent } = componentConfig
 
   const changeProps = (newProps: ComponentPropsType) => {
+    console.log(newProps, 'new')
+
     // 选中组件==null 不执行
     if (selectedComponent == null) return
     const { fe_id } = selectedComponent
 
     dispatch(changeComponentProps({ fe_id, newProps }))
-
-    console.log(newProps, 'new')
   }
 
   return <PropComponent {...props} onChange={changeProps} disabled={isLocked || isHidden} />

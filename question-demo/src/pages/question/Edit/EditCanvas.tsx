@@ -12,12 +12,13 @@ import { ComponentInfoType, changeSelectId, moveComponent } from '../../../store
 import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
 import SortContainer from '../../../components/DragSortable/SortableContainer'
 import SortableItem from '../../../components/DragSortable/SortableItem'
+
 type PropsType = {
   loading: boolean
 }
 
+// 每个组件的信息  redux store 中获取
 function genComponent(componentInfo: ComponentInfoType) {
-  // 每个组件的信息  redux store 中获取
   const { type, props } = componentInfo
   const componentConfig = getComponentConfigByType(type)
   if (componentConfig == null) return null
@@ -27,15 +28,8 @@ function genComponent(componentInfo: ComponentInfoType) {
 
 const EditCanvas: FC<PropsType> = ({ loading }) => {
   const { componentList, selectedId } = useGetComponentInfo()
-  // console.log(componentList, '服务端Mock的数据')
+  console.log(componentList, '服务端Mock的数据')
   const dispatch = useDispatch()
-
-  // 点击选中组件
-  const handleClick = (event: MouseEvent, id: string) => {
-    event.stopPropagation() // 阻止事件冒泡
-    dispatch(changeSelectId(id))
-  }
-
   useBindCanvasKeyPress()
 
   if (loading) {
@@ -44,6 +38,12 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
         <Spin />
       </div>
     )
+  }
+
+  // 点击选中组件
+  const handleClick = (event: MouseEvent, id: string) => {
+    event.stopPropagation() // 阻止事件冒泡
+    dispatch(changeSelectId(id))
   }
 
   // SortContainer 组件组件 items 属性  需要每个item都有id
@@ -73,6 +73,7 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
 
             const wrapperClassName = classNames({
               [wrapperDefaultClassName]: true,
+              // 当前组件被选中 添加选中样式 蓝色边框
               [selectedClassName]: fe_id === selectedId,
               [lockedClassName]: isLocked,
             })
