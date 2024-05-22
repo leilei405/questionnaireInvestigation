@@ -5,12 +5,12 @@ import { QuestionRadioDefaultProps, QuestionRadioPropsType } from './type'
 const { Paragraph } = Typography
 
 export const QuestionRadio: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
-  const { title, isVertical, options } = { ...QuestionRadioDefaultProps, ...props }
+  const { title, isVertical, options = [], value } = { ...QuestionRadioDefaultProps, ...props }
 
   return (
     <div>
       <Paragraph strong>{title}</Paragraph>
-      <Radio.Group style={{ margin: '5px' }}>
+      <Radio.Group value={value} style={{ margin: '5px' }}>
         <Space direction={isVertical ? 'vertical' : 'horizontal'}>
           {options?.map(item => {
             const { value, text } = item

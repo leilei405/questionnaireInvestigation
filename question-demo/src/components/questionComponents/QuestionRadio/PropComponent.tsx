@@ -5,7 +5,7 @@ import { QuestionRadioPropsType, OptionType } from './type'
 import { PlusOutlined, MinusCircleTwoTone } from '@ant-design/icons'
 
 const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
-  const { title, isVertical, options, value, disabled, onChange } = props
+  const { title, isVertical, options = [], value, disabled, onChange } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
     const newValues = form.getFieldsValue() as QuestionRadioPropsType
     console.log(newValues, '====newValues===')
 
-    // if (newValues.options) {
-    //   // 需要清除text === undefined的选项
-    //   newValues.options = newValues.options.filter(opt => !(opt.text == null))
-    // }
+    if (newValues.options) {
+      // 需要清除text === undefined的选项
+      newValues.options = newValues.options.filter(opt => !(opt.text == null))
+    }
 
     const { options = [] } = newValues
     options.forEach(opt => {
@@ -46,7 +46,7 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
         <Form.List name="options">
           {(fields, { add, remove }) => (
             <>
-              {/* 遍历所有的选项 */}
+              {/* 添加选项 */}
               <Form.Item>
                 <Button
                   type="link"
@@ -57,6 +57,7 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
                   添加选项
                 </Button>
               </Form.Item>
+              {/* 遍历所有的选项 */}
               {fields.map(({ key, name }, index) => {
                 return (
                   <Space key={key} align="baseline">
@@ -84,16 +85,6 @@ const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType
                   </Space>
                 )
               })}
-              <Form.Item>
-                <Button
-                  type="link"
-                  onClick={() => add({ value: '', text: '' })}
-                  icon={<PlusOutlined />}
-                  block
-                >
-                  添加选项
-                </Button>
-              </Form.Item>
             </>
           )}
         </Form.List>
