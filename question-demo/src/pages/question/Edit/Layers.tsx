@@ -15,8 +15,8 @@ import styles from './Layers.module.scss'
 import SortContainer from '../../../components/DragSortable/SortableContainer'
 import SortableItem from '../../../components/DragSortable/SortableItem'
 const Layers: FC = () => {
-  const { componentList, selectedId } = useGetComponentInfo()
   const dispatch = useDispatch()
+  const { componentList, selectedId } = useGetComponentInfo()
   const [changedTitleId, setChangedTitleId] = useState('')
 
   // 点击选中组件
@@ -87,6 +87,7 @@ const Layers: FC = () => {
                   <Input
                     value={title}
                     onChange={changeTitle}
+                    // 失去焦点时,按下回车 修改标题
                     onPressEnter={() => setChangedTitleId('')}
                     onBlur={() => setChangedTitleId('')}
                   />

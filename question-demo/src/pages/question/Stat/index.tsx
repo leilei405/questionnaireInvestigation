@@ -31,7 +31,7 @@ export const Stat: FC = () => {
   }
 
   // 主体
-  const GenContent = () => {
+  const genContent = () => {
     if (typeof isPublished === 'boolean' && !isPublished) {
       return (
         <div style={{ flex: '1' }}>
@@ -79,11 +79,7 @@ export const Stat: FC = () => {
       {!loading && <StatHeader />}
       <div className={styles['content-wrapper']}>
         {loading && <RenderLoading />}
-        {!loading && (
-          <div className={styles.content}>
-            <GenContent />
-          </div>
-        )}
+        {!loading && <div className={styles.content}>{genContent()}</div>}
       </div>
     </div>
   )
