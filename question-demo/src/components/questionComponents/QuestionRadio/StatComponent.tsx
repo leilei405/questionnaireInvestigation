@@ -10,15 +10,13 @@ function format(n: number) {
   return (n * 100).toFixed(2)
 }
 
-export const StatComponent: FC<QuestionRadioStatPropsType> = (
-  props: QuestionRadioStatPropsType
-) => {
-  const { stat = [] } = props
+export const StatComponent: FC<QuestionRadioStatPropsType> = ({ stat }) => {
   const sum = useMemo(() => {
     let s = 0
     stat.forEach(i => (s += i.count))
     return s
   }, [stat])
+
   return (
     <div style={{ width: '350px', height: '400px' }}>
       <ResponsiveContainer width="100%" height="100%">
