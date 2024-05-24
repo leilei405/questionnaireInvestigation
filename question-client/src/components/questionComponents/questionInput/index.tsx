@@ -1,13 +1,6 @@
 import React, { FC } from "react";
 import styles from "./index.module.scss";
-
-type PropsType = {
-  fe_id: string;
-  props: {
-    title: string;
-    placeholder?: string;
-  };
-};
+import { PropsType } from "./types";
 
 const QuestionInput: FC<PropsType> = ({ fe_id, props }) => {
   const { title, placeholder = "" } = props || {};
