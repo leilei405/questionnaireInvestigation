@@ -28,7 +28,7 @@ export default function Question(props: PropsType) {
                 { text: "女", value: "2" },
               ],
               isVertical: false,
-              value: "1",
+              value: "",
             }}
           />
         </div>
