@@ -1,12 +1,19 @@
-type TestProps = {
-  id: string;
-};
+import QuestionInput from "@/components/questionComponents/questionInput";
+import { JSX } from "react";
 
-export default function Question(props: TestProps) {
+type PropsType = { id: string };
+
+export default function Question(props: PropsType) {
   return (
     <div>
       <h1>Question</h1>
-      <h2>{props.id}</h2>
+      <h2>id: {props.id}</h2>
+      <form>
+        <QuestionInput
+          fe_id="张三"
+          props={{ title: "职业", placeholder: "请输入职业名称" }}
+        />
+      </form>
     </div>
   );
 }
