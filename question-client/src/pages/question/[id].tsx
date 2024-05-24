@@ -11,6 +11,7 @@ export default function Question(props: TestProps) {
   );
 }
 
+// 获取路由参数 c1111
 export async function getServerSideProps(context: any) {
   // 获取路由参数
   const { id = "" } = context.params;
