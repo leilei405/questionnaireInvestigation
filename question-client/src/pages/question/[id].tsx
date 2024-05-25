@@ -1,8 +1,9 @@
 import React from "react";
 import QuestionInput from "@/components/questionComponents/questionInput";
 import QuestionRadio from "@/components/questionComponents/questionRadio";
-import styles from "./index.module.scss";
 import { PropsType } from "./types";
+import styles from "./index.module.scss";
+
 export default function Question(props: PropsType) {
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -10,7 +11,7 @@ export default function Question(props: PropsType) {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>问卷调查表单</h1>
-      <form onSubmit={handleSubmit}>
+      <form method="post" action="/api/answer" onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={props.id} />
         <div className={styles.componentWrapper}>
           <QuestionInput
@@ -41,7 +42,11 @@ export default function Question(props: PropsType) {
   );
 }
 
-// 获取路由参数 c1111
+/**
+ * 获取服务端渲染页面的属性
+ * @param context 页面上下文对象
+ * @returns 返回包含页面属性的对象
+ */
 export async function getServerSideProps(context: PropsType) {
   // 获取路由参数
   const { id = "" } = context.params;
