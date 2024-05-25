@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { postAnswer } from "@/services/answer";
 
-type PropsType = {
-    [key: string]: any
-}
+type PropsType = { [key: string]: any }
 
 /**
  * 获取答卷信息
@@ -39,20 +38,22 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method !== "POST") {
-    res.redirect('/fail')
-    res.status(200).json({ errCode: -1, errMsg: "请求方式错误" });
+    res.redirect('/subInfo/fail')
+    res.status(200).json({ errno: -1, errMsg: "请求方式错误" });
   }
   const answerInfo = getAnswerInfo(req.body);
-  console.log(answerInfo)
   try {
     // 调用接口
-
-    // 成功后跳转成功页面
-    res.redirect('/success')
+    const data = await postAnswer(answerInfo);
+    console.log(data.errno, '=====');
+    
+    if (data.errno === 200) {
+      res.redirect('/subInfo/success')
+    } else {
+      res.redirect('/subInfo/fail')
+    }    
   }
   catch (error) {
-    // 失败后跳转失败页面
-    res.redirect('/fail')
-    res.status(200).json({ errCode: -1, errMsg: "请求失败" });
+    res.redirect('/subInfo/fail')
   }
 }
