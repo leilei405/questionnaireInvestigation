@@ -33,7 +33,7 @@ export const getComponent = (com: ComponentInfoProps) => {
       return <QuestionInfo {...props} />;
     case "questionTextarea": // 多行文本
       return <QuestionTextarea fe_id={fe_id} props={props} />;
-    case "questionCheckbox": // 多选框
+    case "questionCheckBox": // 多选框
       return <QuestionCheckbox fe_id={fe_id} props={props} />;
     default:
       return null;
