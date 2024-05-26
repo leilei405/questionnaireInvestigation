@@ -1,6 +1,7 @@
 import React from "react";
 import QuestionInput from "@/components/questionComponents/questionInput";
 import QuestionRadio from "@/components/questionComponents/questionRadio";
+import PageWrapper from "@/components/pageWrapper";
 import { PropsType } from "./types";
 import styles from "./index.module.scss";
 
@@ -9,8 +10,7 @@ export default function Question(props: PropsType) {
     console.log(values);
   };
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>问卷调查表单</h1>
+    <PageWrapper title="问卷调查表单">
       <form method="post" action="/api/answer" onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={props.id} />
         <div className={styles.componentWrapper}>
@@ -38,7 +38,7 @@ export default function Question(props: PropsType) {
           <button type="submit">提交</button>
         </div>
       </form>
-    </div>
+    </PageWrapper>
   );
 }
 
