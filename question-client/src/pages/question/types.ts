@@ -8,9 +8,7 @@ export type PropsType = {
         css?: string;
         isPublished: boolean; 
         isDeleted: boolean;
-        componentList: {
-            [key: string]: any;
-        }[]
+        componentList: Array<any>
     }
     msg?: string;
     // id: string; 

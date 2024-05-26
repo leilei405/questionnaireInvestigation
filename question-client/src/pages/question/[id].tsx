@@ -1,8 +1,9 @@
 import React from "react";
-import QuestionInput from "@/components/questionComponents/questionInput";
-import QuestionRadio from "@/components/questionComponents/questionRadio";
+// import QuestionInput from "@/components/questionComponents/questionInput";
+// import QuestionRadio from "@/components/questionComponents/questionRadio";
 import PageWrapper from "@/components/pageWrapper";
 import { getQuestionById } from "@/services/question";
+import { getComponent } from "@/components";
 import { PropsType } from "./types";
 import styles from "./index.module.scss";
 
@@ -48,6 +49,19 @@ export default function Question(props: PropsType) {
   }
 
   // 遍历组件
+  const ComponentListDom = (
+    <>
+      {componentList.map((item) => {
+        // 获取组件
+        const ComponentElem = getComponent(item);
+        return (
+          <div key={item.fe_id} className={styles.componentWrapper}>
+            {ComponentElem}
+          </div>
+        );
+      })}
+    </>
+  );
 
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -56,7 +70,7 @@ export default function Question(props: PropsType) {
     <PageWrapper title={title} desc={desc}>
       <form method="post" action="/api/answer" onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={id} />
-        <div className={styles.componentWrapper}>
+        {/* <div className={styles.componentWrapper}>
           <QuestionInput
             fe_id="c1"
             props={{ title: "职业", placeholder: "请输入职业名称" }}
@@ -75,8 +89,8 @@ export default function Question(props: PropsType) {
               value: "",
             }}
           />
-        </div>
-
+        </div> */}
+        {ComponentListDom}
         <div className={styles.submitBtnContainer}>
           <button type="submit">提交</button>
         </div>
