@@ -1,5 +1,8 @@
 import QuestionInput from "./questionComponents/questionInput";
 import QuestionRadio from "./questionComponents/questionRadio";
+import QuestionTitle from "./questionComponents/questionTitle";
+import QuestionParagraph from "./questionComponents/questionParagraph";
+import QuestionInfo from "./questionComponents/questionInfo";
 
 type ComponentInfoProps = {
   fe_id: string;
@@ -20,6 +23,12 @@ export const getComponent = (com: ComponentInfoProps) => {
       return <QuestionInput fe_id={fe_id} props={props} />;
     case "questionRadio":
       return <QuestionRadio fe_id={fe_id} props={props} />;
+    case "questionTitle":
+      return <QuestionTitle {...props} />;
+    case "questionParagraph":
+      return <QuestionParagraph {...props} />;
+    case "questionInfo":
+      return <QuestionInfo {...props} />;
     default:
       return null;
   }

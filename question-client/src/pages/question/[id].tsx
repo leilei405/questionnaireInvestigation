@@ -1,6 +1,4 @@
 import React from "react";
-// import QuestionInput from "@/components/questionComponents/questionInput";
-// import QuestionRadio from "@/components/questionComponents/questionRadio";
 import PageWrapper from "@/components/pageWrapper";
 import { getQuestionById } from "@/services/question";
 import { getComponent } from "@/components";
@@ -70,26 +68,6 @@ export default function Question(props: PropsType) {
     <PageWrapper title={title} desc={desc}>
       <form method="post" action="/api/answer" onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={id} />
-        {/* <div className={styles.componentWrapper}>
-          <QuestionInput
-            fe_id="c1"
-            props={{ title: "职业", placeholder: "请输入职业名称" }}
-          />
-        </div>
-        <div className={styles.componentWrapper}>
-          <QuestionRadio
-            fe_id="c2"
-            props={{
-              title: "性别",
-              options: [
-                { text: "男", value: "1" },
-                { text: "女", value: "2" },
-              ],
-              isVertical: false,
-              value: "",
-            }}
-          />
-        </div> */}
         {ComponentListDom}
         <div className={styles.submitBtnContainer}>
           <button type="submit">提交</button>

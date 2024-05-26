@@ -16,7 +16,6 @@ const PageWrapper: FC<PropsType> = (props) => {
   const { title, desc = "", css = "", js, children } = props;
   return (
     <>
-      <h1 className={styles.pageTitle}>{title}</h1>
       <Head>
         <title>{title}</title>
         <meta name="description" content={desc} />
