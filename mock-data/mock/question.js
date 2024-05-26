@@ -18,6 +18,7 @@ module.exports = [
           js: "",
           css: "",
           isPublished: true,
+          isDeleted: false,
           componentList: getComponentList(),
         },
       };
