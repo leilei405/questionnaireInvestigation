@@ -48,7 +48,7 @@ export default function Question(props: PropsType) {
     );
   }
 
-  // 遍历组件
+  // 遍历 动态渲染组件
   const ComponentListDom = (
     <>
       {componentList.map((item) => {
