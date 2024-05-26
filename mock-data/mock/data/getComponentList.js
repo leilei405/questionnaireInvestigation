@@ -47,7 +47,7 @@ const getComponentList = () => {
       isHidden: false,
       isLocked: false,
       props: {
-        title: "姓名",
+        title: "你的姓名",
         placeholder: "请输入",
       },
     },
@@ -61,7 +61,7 @@ const getComponentList = () => {
       isHidden: false,
       isLocked: false,
       props: {
-        title: "电话",
+        title: "你的电话",
         placeholder: "请输入电话",
       },
     },
@@ -75,7 +75,7 @@ const getComponentList = () => {
       isHidden: false,
       isLocked: false,
       props: {
-        title: "兴趣",
+        title: "你的兴趣",
         desc: "请输入...",
       },
     },

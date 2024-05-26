@@ -7,7 +7,7 @@ type PropsType = {
 
 const QuestionInfo: FC<PropsType> = ({ title, desc }) => {
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <h1>{title}</h1>
       <p>{desc}</p>
     </div>

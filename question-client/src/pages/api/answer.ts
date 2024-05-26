@@ -45,7 +45,6 @@ export default async function handler(
   try {
     // 调用接口
     const data = await postAnswer(answerInfo);
-    console.log(data.errno, '=====');
     
     if (data.errno === 200) {
       res.redirect('/subInfo/success')
