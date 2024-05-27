@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useMemo, useRef } from 'react'
 import { Button, Space, Typography, Input, Tooltip, message, Popover } from 'antd'
 import type { InputRef } from 'antd'
 import QRCode from 'qrcode.react'
@@ -23,9 +23,12 @@ const StatHeader: FC = () => {
     message.success('拷贝成功')
   }
 
-  const GetLinkAndQRcode = () => {
+  // 使用useMemo 缓存函数结果 避免每次渲染都重新计算
+  // useMemo 第一个参数是函数，第二个参数是依赖项
+  // 依赖项变化时才会重新计算
+  // 1.依赖项是否经常变化 2.缓存的元素是否创建成本较高
+  const GetLinkAndQRcode = useMemo(() => {
     if (!isPublished) return null
-
     // 拼接url 需要参考C端规则
     const url = `http://localhost:8000/question/stat/${id}`
 
@@ -37,6 +40,7 @@ const StatHeader: FC = () => {
         </div>
       )
     }
+
     return (
       <Space>
         <Input ref={urlInputRef} value={url} style={{ width: '300px' }} />
@@ -48,7 +52,7 @@ const StatHeader: FC = () => {
         </Popover>
       </Space>
     )
-  }
+  }, [id, isPublished])
 
   return (
     <div className={styles['header-wrapper']}>
@@ -61,9 +65,7 @@ const StatHeader: FC = () => {
             <Title level={5}>{title}</Title>
           </Space>
         </div>
-        <div className={styles.main}>
-          <GetLinkAndQRcode />
-        </div>
+        <div className={styles.main}>{GetLinkAndQRcode}</div>
         <div className={styles.right}>
           <Button type="primary" onClick={() => nav(`/question/edit/${id}`)}>
             编辑
