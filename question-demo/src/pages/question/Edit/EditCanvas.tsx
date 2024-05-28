@@ -1,8 +1,5 @@
 import React, { FC, MouseEvent } from 'react'
 import styles from './editCanvas.module.scss'
-// 临时静态展示 title input
-// import { QuestionTitle } from '../../../components/questionComponents/questionTitle/ComponentsTitle'
-// import { QuestionInput } from '../../../components/questionComponents/questionInput/ComponentsInput'
 import { Spin } from 'antd'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
