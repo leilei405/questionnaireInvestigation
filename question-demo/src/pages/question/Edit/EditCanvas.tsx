@@ -82,16 +82,6 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
               </SortableItem>
             )
           })}
-        {/* <div className={styles['component-wrapper']}>
-        <div className={styles.component}>
-          <QuestionTitle />
-        </div>
-      </div>
-      <div className={styles['component-wrapper']}>
-        <div className={styles.component}>
-          <QuestionInput />
-        </div>
-      </div> */}
       </div>
     </SortContainer>
   )
