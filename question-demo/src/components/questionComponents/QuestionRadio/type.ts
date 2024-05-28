@@ -20,7 +20,7 @@ export const QuestionRadioDefaultProps: QuestionRadioPropsType = {
     { value: 'item2', text: '选项2' },
     { value: 'item3', text: '选项3' },
   ],
-  value: '', // 默认值
+  value: '',
 }
 
 // 统计组件的属性类型

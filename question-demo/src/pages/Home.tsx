@@ -9,34 +9,7 @@ import axios from 'axios'
 const Home: FC = () => {
   const nav = useNavigate()
 
-  // react18 开发环境会执行俩次
-  // useEffect(() => {
-  // mock.js 只能劫持 XMLHttpRequest, 不能劫持fetch
-  // axios 内部使用 XMLHttpRequest API, 没用fetch
-  // axios.get('/api/test').then(res => {
-  //   console.log(res.data)
-  // })
-  // fetch('/api/test')
-  //   .then(res => {
-  //     res.json()
-  //   })
-  //   .then(data => {
-  //     console.log(data)
-  //   })
-  // }, [])
-
   useEffect(() => {
-    // http://localhost:3001/api/question   服务端
-    // http://localhost:3000  前端
-    // 跨域 mock
-    // create-react-app webpack devServer 代理
-    // fetch('/api/question/100')
-    //   .then(res => {
-    //     res.json()
-    //   })
-    //   .then(data => {
-    //     console.log(data)
-    //   })
     axios.get('/api/test').then(res => {
       console.log(res.data)
     })
