@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import undoable, { excludeAction, StateWithHistory } from 'redux-undo'
 
-import userReducer, { UserStateType } from './userReducer'  // 用户模块
+import userReducer, { UserStateType } from './userReducer' // 用户模块
 import componentReducer, { ComponentsStateType } from './componentReducer' // 组件模块
 import pageInfoReducer, { PageInfoType } from './pageInfoReducer' // 页面信息模块
 
