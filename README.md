@@ -1,5 +1,9 @@
 # questionnaireInvestigation
-一款问卷调查覆盖,前端,后端,B端,C端
+## 介绍
+
+- 一款关于低代码的问卷调查，覆盖B端,C端
+
+- 使用技术栈是React+Antd+Typescript+ahooks+Next14+Nest.js
 
 ## 项目启动
 
@@ -18,14 +22,20 @@
 
    
 
-## 项目简介图示
+## 项目架构
 
-![项目简介图示](img/demo2.png)
+![项目简介图示](img/整体架构.png)
 
-### PC效果
+## 效果演示
 
-![PC效果](img/pc.png)
+### 主页
 
-### H5-UI图
+![PC效果](img/首页.png)
 
-![H5-UI图](img/h5.png)
+![PC效果](img/编辑器.png)
+
+![PC效果](img/列表页.png)
+
+### H5效果演示
+
+![H5-UI图](img/H5.png)
