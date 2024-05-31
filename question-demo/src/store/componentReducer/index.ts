@@ -6,14 +6,15 @@ import { arrayMove } from '@dnd-kit/sortable'
 
 import { ComponentPropsType } from '../../components/questionComponents'
 import { getNextSelectedId, insertNewComponent } from './utils'
+
 // 定义每个组件的类型
 export type ComponentInfoType = {
-  fe_id: string
-  type: string
-  title: string
+  fe_id: string // 前端组件ID
+  type: string // 组件类型
+  title: string // 组件标题
   isHidden?: boolean // 是否隐藏组件
   isLocked?: boolean // 是否锁定组件
-  props: ComponentPropsType
+  props: ComponentPropsType // 组件属性
 }
 
 // 当前模块存储的列表
