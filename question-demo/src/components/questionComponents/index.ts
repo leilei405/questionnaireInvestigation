@@ -13,9 +13,7 @@ import QuestionCheckBoxConfig, {
   QuestionCheckBoxStatPropsType,
 } from './QuestionCheckBox'
 
-// 统一 各个组件的 prop type
-// & 交叉
-// | 联合
+// 使用交叉类型 合并统一 各个组件的 prop type
 export type ComponentPropsType = QuestionTitlePropsType &
   QuestionInputPropsType &
   QuestionParagraphPropsType &
@@ -27,7 +25,7 @@ export type ComponentPropsType = QuestionTitlePropsType &
 // 统一 各个组件的统计属性类型
 type ComponentStatPropsType = QuestionRadioStatPropsType & QuestionCheckBoxStatPropsType
 
-// 统一定义  组件的配置
+// 统一 各个组件的配置类型
 export type ComponentConfType = {
   title: string
   type: string
