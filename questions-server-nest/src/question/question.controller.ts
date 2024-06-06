@@ -1,7 +1,14 @@
-import { Controller, Get, Param, Patch, Query, Body } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Query, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
+
 @Controller('question')
 export class QuestionController {
+
+    // 添加过滤器之后 模拟错误信息
+    @Get('textError')
+    Test() {
+        throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST)
+    }
     
     // 获取问卷列表数据
     @Get()
