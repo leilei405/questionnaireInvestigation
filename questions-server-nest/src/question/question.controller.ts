@@ -1,57 +1,40 @@
-import { Controller, Get, Param, Patch, Query, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Query, Body, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
+import { QuestionService } from './question.service'
 
 @Controller('question')
 export class QuestionController {
+    constructor(
+        private readonly questionService: QuestionService
+    ) {}
 
-    // 添加过滤器之后 模拟错误信息
-    @Get('textError')
-    Test() {
-        throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST)
+    // 创建问卷
+    @Post() 
+    create(){
+        return this.questionService.create();
     }
     
-    // 获取问卷列表数据
+    // 获取问卷列表
     @Get()
-    findAll(
-        @Query('keyword') keyword: string,
-        @Query('page') page: number,
-        @Query('pageSize') pageSize: number,
-    ) {
-        return {
-            keyword,
-            page,
-            pageSize,
-        }
+    findAll(@Query('keyword') keyword: string,  @Query('page') page: number, @Query('pageSize') pageSize: number) {
+        return { keyword, page, pageSize }
     }
 
-    // 获取单个问卷详情数据
+    // 获取单个问卷
     @Get(':id')
-    findOne(
-        @Param('id') id: string,
-    ) {
-        console.log(id, '单个问卷详情');
-        
-        return { id }
+    findOne(@Param('id') id: string) {
+        return this.questionService.findOne(id);        
     }
 
-    // 问卷更新
+    // 更新问卷
     @Patch(':id')
-    updateOne(
-        @Param('id') id: string,
-        @Body() questionDto: QuestionDto
-    ) {
-        console.log(id, questionDto, '更新问卷');
-        
-        return {
-            id,
-            ...questionDto,
-        };
+    updateOne(@Param('id') id: string, @Body() questionDto: QuestionDto) {
+        return { id, ...questionDto };
     }
 
-
-    // 问卷详情页
-    @Get('detail')
-    detail() {
-        return '问卷详情页';
-    }
+     // 添加过滤器之后 模拟错误信息
+    // @Get('textError')
+    // Test() {
+    //     throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST)
+    // }
 }
