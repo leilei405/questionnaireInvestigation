@@ -11,8 +11,16 @@ export class QuestionService {
     ) {}
 
     // 问卷列表查询
-    async questionList({keyword = '', page = 1, pageSize = 10}) {
-        const whereOpt: any = {};
+    async questionList({
+        keyword = '',
+        page = 1,
+        pageSize = 10,
+        isDeleted = false,
+        isStar,
+        author = ''
+    }) {
+        const whereOpt: any = { author, isDeleted };
+        if (isStar != null) whereOpt.isStar = isStar;
         if (keyword) {
             const reg = new RegExp(keyword, 'i');
             whereOpt.title = { $regex: reg }; // 模糊搜索
@@ -25,8 +33,9 @@ export class QuestionService {
     }
 
     // 问卷列表查询总数
-    async questionAllList({ keyword = '' }) {
-        const whereOpt: any = {};
+    async questionAllList({ keyword = '', isDeleted = false, isStar, author = '' }) {
+        const whereOpt: any = { author, isDeleted };
+        if (isStar != null) whereOpt.isStar = isStar;
         if (keyword) {
             const reg = new RegExp(keyword, 'i');
             whereOpt.title = { $regex: reg }; // 模糊搜索
@@ -62,12 +71,26 @@ export class QuestionService {
     }
 
     // 更新问卷
-    async questionUpdate(id: string, questionData) {
-        return await this.questionModel.updateOne({ _id: id}, questionData)
+    async questionUpdate(id: string, questionData, author: string) {
+        return await this.questionModel.updateOne({ _id: id, author }, questionData)
     }
    
-    // 删除问卷
-    async questionDelete(id: string) {
-        return this.questionModel.findByIdAndDelete(id);
+    // 删除单个问卷
+    async questionDelete(id: string, author: string) {
+        // return this.questionModel.findByIdAndDelete(id);
+        const res = await this.questionModel.findOneAndDelete({
+            _id: id,
+            author
+        });
+        return res;
+    }
+
+    // 删除多个问卷
+    async batchDelete(ids: string[], author: string) {
+        const res = await this.questionModel.deleteMany({ 
+            _id: { $in: ids }, // $in 查询当前_id 数组中是否包含 包含的话则删除
+            author 
+        });
+        return res;
     }
 }

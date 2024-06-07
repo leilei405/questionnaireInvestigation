@@ -20,10 +20,28 @@ export class QuestionController {
     async findAll(
         @Query('keyword') keyword: string,
         @Query('page') page: number,
-        @Query('pageSize') pageSize: number
+        @Query('pageSize') pageSize: number,
+        @Query('isDeleted') isDeleted: boolean = false,
+        @Query('isStar') isStar: boolean = false,
+        @Request() req
     ) {
-        const data = await this.questionService.questionList({ keyword, page, pageSize });
-        const total = await this.questionService.questionAllList({ keyword });
+        const { username } = req.user;
+        // 获取问卷列表
+        const data = await this.questionService.questionList({ 
+            keyword,
+            page,
+            pageSize,
+            isDeleted,
+            isStar,
+            author: username
+        });
+        // 获取总数
+        const total = await this.questionService.questionAllList({ 
+            keyword,
+            isDeleted,
+            isStar,
+            author: username
+        });
         return {
             data,
             total,
@@ -36,16 +54,26 @@ export class QuestionController {
         return this.questionService.questionFindOne(id);        
     }
 
-    // 删除问卷
+    // 删除单个问卷
     @Delete(':id')
-    deleteOne(@Param('id') id: string) {
-        return this.questionService.questionDelete(id);
+    deleteOne(@Param('id') id: string, @Request() req) {
+        const { username } = req.user;
+        return this.questionService.questionDelete(id, username);
+    }
+
+    // 批量删除问卷
+    @Delete()
+    batchDelete(@Body() body, @Request() req){
+        const { username } = req.user;
+        const { ids = [] } = body;
+        return this.questionService.batchDelete(ids, username);
     }
 
     // 更新问卷
     @Patch(':id')
-    updateOne(@Param('id') id: string, @Body() questionData: QuestionDto) {
-        return this.questionService.questionUpdate(id, questionData);
+    updateOne(@Param('id') id: string, @Body() questionData: QuestionDto, @Request() req) {
+        const { username } = req.user;
+        return this.questionService.questionUpdate(id, questionData, username);
     }
     
 }
