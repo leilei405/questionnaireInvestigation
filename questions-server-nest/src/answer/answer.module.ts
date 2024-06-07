@@ -6,6 +6,7 @@ import { Answer, AnswerSchema } from './answer.schema'
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Answer.name, schema: AnswerSchema }])],
+  exports: [AnswerService],
   controllers: [AnswerController],
   providers: [AnswerService]
 })

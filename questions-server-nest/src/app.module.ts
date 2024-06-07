@@ -7,6 +7,7 @@ import { QuestionModule } from './question/question.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { AnswerModule } from './answer/answer.module';
+import { StatModule } from './stat/stat.module';
 
 @Module({
   imports: [
@@ -14,7 +15,9 @@ import { AnswerModule } from './answer/answer.module';
     MongooseModule.forRoot(`mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`), // 不要写localhost
     QuestionModule, // 问卷
     UserModule, // 用户
-    AuthModule, AnswerModule, // 验证
+    AuthModule, // 验证
+    AnswerModule, // 答卷
+    StatModule, // 统计
   ],
   controllers: [AppController],
   providers: [AppService],
