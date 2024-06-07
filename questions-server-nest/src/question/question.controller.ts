@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Patch, Query, Body, Post, Delete } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
 import { QuestionService } from './question.service'
-import { count } from 'console';
 
 @Controller('question')
 export class QuestionController {
@@ -43,6 +42,5 @@ export class QuestionController {
     updateOne(@Param('id') id: string, @Body() questionData: QuestionDto) {
         return this.questionService.questionUpdate(id, questionData);
     }
-
     
 }
