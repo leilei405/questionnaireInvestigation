@@ -17,7 +17,11 @@ export class QuestionController {
     
     // 获取问卷列表
     @Get()
-    async findAll(@Query('keyword') keyword: string,  @Query('page') page: number, @Query('pageSize') pageSize: number) {
+    async findAll(
+        @Query('keyword') keyword: string,
+        @Query('page') page: number,
+        @Query('pageSize') pageSize: number
+    ) {
         const data = await this.questionService.questionList({ keyword, page, pageSize });
         const total = await this.questionService.questionAllList({ keyword });
         return {
