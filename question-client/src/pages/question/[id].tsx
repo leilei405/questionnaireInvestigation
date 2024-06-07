@@ -8,7 +8,7 @@ import styles from "./index.module.scss";
 export default function Question(props: PropsType) {
   const { errno, data, msg = "" } = props;
   const {
-    id,
+    _id: id,
     title = "",
     isDeleted,
     desc = "",
@@ -61,12 +61,9 @@ export default function Question(props: PropsType) {
     </>
   );
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
-  };
   return (
     <PageWrapper title={title} desc={desc}>
-      <form method="post" action="/api/answer" onSubmit={handleSubmit}>
+      <form method="post" action="/api/answer">
         <input type="hidden" name="questionId" value={id} />
         {ComponentListDom}
         <div className={styles.submitBtnContainer}>

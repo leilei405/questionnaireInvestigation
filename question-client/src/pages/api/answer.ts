@@ -41,12 +41,13 @@ export default async function handler(
     res.redirect('/subInfo/fail')
     res.status(200).json({ errno: -1, errMsg: "请求方式错误" });
   }
+  
   const answerInfo = getAnswerInfo(req.body);
+
   try {
     // 调用接口
     const data = await postAnswer(answerInfo);
-    
-    if (data.errno === 200) {
+    if (data.errno === 0) {
       res.redirect('/subInfo/success')
     } else {
       res.redirect('/subInfo/fail')

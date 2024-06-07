@@ -1,7 +1,7 @@
 export type PropsType = {
     errno: number;
     data?: {
-        id: string; 
+        _id: string; 
         title: string; 
         desc?: string; 
         js?: string; 

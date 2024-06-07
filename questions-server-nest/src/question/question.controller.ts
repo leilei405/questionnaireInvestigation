@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Patch, Query, Body, Post, Delete, Request } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
 import { QuestionService } from './question.service'
+import { Public } from 'src/auth/decorators/public.decorators';
 
 @Controller('question')
 export class QuestionController {
@@ -49,6 +50,7 @@ export class QuestionController {
     }
 
     // 获取单个问卷
+    @Public()
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.questionService.questionFindOne(id);        
