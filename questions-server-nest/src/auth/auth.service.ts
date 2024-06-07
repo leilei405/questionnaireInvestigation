@@ -1,10 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private readonly userService: UserService
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService,        
     ){}
 
     // 验证用户
@@ -16,6 +18,8 @@ export class AuthService {
         // 返回用户信息 不暴露密码
         const { password: pw, ...userInfo } = user.toObject();
 
-        return userInfo;
+        return {
+            token: this.jwtService.sign(userInfo),
+        }
     }
 }
