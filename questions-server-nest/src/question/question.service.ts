@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Question } from './question.schema'
 import { nanoid } from 'nanoid';
+import mongoose from 'mongoose';
 
 
 @Injectable()
@@ -92,5 +93,27 @@ export class QuestionService {
             author 
         });
         return res;
+    }
+
+    // 复制问卷
+    async duplicate(id: string, author: string) {
+        const question = await this.questionModel.findById(id);
+
+        // 复制一份问卷
+        const newQuestion = new this.questionModel({
+            ...question.toObject(), // toObject 获取原始数据类型
+            _id: new mongoose.Types.ObjectId(), // 生成新的mongodb ObjectId 
+            title: `${question.title}副本`,
+            author,
+            isPublished: false,
+            isStar: false,
+            componentList: question.componentList.map(item => {
+                return { 
+                    ...item,
+                    fe_id: nanoid()
+                } // 复制一份问卷组件 生成新的fe_id
+            })
+        })
+        return await newQuestion.save();
     }
 }

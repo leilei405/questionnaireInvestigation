@@ -75,5 +75,12 @@ export class QuestionController {
         const { username } = req.user;
         return this.questionService.questionUpdate(id, questionData, username);
     }
+
+    // 复制问卷
+    @Post('duplicate/:id')
+    duplicate(@Param('id') id: string, @Request() req) {
+        const { username } = req.user;
+        return this.questionService.duplicate(id, username);
+    }
     
 }
