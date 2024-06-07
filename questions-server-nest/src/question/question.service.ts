@@ -35,10 +35,11 @@ export class QuestionService {
     }
 
     // 创建问卷
-    async questionCreate() {
+    async questionCreate(username: string) {
         const newQuestion = new this.questionModel({
             title: "questionTitle" + Date.now(),
             desc: "desc",
+            author: username,
         })
         return await newQuestion.save()
     }

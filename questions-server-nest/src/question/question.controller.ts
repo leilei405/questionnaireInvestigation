@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Query, Body, Post, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Query, Body, Post, Delete, Request } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
 import { QuestionService } from './question.service'
 
@@ -10,8 +10,9 @@ export class QuestionController {
 
     // 创建问卷
     @Post() 
-    create(){
-        return this.questionService.questionCreate();
+    create(@Request() req){
+        const { username } = req.user;
+        return this.questionService.questionCreate(username);
     }
     
     // 获取问卷列表
