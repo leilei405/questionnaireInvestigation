@@ -17,4 +17,16 @@ export class StatController {
             page, pageSize
         });
     }
+
+    @Get(':questionId/:componentFeId')
+    async getComponentStat(
+      @Param('questionId') questionId: string,
+      @Param('componentFeId') componentFeId: string,
+    ) {
+      const stat = await this.statService.getComponentStat(
+        questionId,
+        componentFeId,
+      );
+      return { stat };
+    }
 }
