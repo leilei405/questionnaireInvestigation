@@ -32,7 +32,7 @@ const ManageLayout: FC = () => {
     manual: true, // 手动触发
     onSuccess(res) {
       // 成功之后的回调  onSuccess
-      nav(`/question/edit/${res.id}`) // 跳转到新建问卷的编辑页
+      nav(`/question/edit/${res.id || res._id}`) // 跳转到新建问卷的编辑页
       message.success('创建成功')
     },
   })

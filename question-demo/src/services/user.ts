@@ -14,7 +14,7 @@ export const getQuestionServices = async (): Promise<ResDataType> => {
 export const loginServices = async ({ username, password }: UserType): Promise<ResDataType> => {
   const url = `/api/user/login`
   const body = { username, password }
-  const data = (await http.post(url, { body })) as ResDataType
+  const data = (await http.post(url, { ...body })) as ResDataType
   return data
 }
 
@@ -26,6 +26,6 @@ export const registerServices = async ({
 }: UserType): Promise<ResDataType> => {
   const url = `/api/user/register`
   const body = { username, password, nickname: nickname || username }
-  const data = (await http.post(url, { body })) as ResDataType
+  const data = (await http.post(url, { ...body })) as ResDataType
   return data
 }

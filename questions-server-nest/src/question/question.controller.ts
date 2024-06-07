@@ -43,7 +43,7 @@ export class QuestionController {
             author: username
         });
         return {
-            data,
+            list: data,
             total,
         }
     }

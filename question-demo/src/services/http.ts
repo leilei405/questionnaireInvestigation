@@ -2,8 +2,11 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { getToken } from '../utils/rememberInfo'
+
 const instance = axios.create({
+  baseURL: 'http://localhost:3333/',
   timeout: 10 * 1000,
+  headers: {},
 })
 
 // 每次request 每次请求都带上token

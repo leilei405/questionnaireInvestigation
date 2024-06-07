@@ -12,6 +12,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter()) // 全局异常过滤器
 
+  app.enableCors(); // 允许跨域
+
   await app.listen(3333); // 监听端口 可更改
 }
 

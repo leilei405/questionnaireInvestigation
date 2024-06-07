@@ -37,7 +37,7 @@ export const QuestionCard: FC<PropsType> = props => {
       onSuccess: res => {
         message.success('复制成功')
         // 跳转到问卷编辑页
-        nav(`/question/edit/${res.id}`)
+        nav(`/question/edit/${res.id || res._id}`)
       },
     }
   )

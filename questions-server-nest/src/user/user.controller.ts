@@ -15,6 +15,13 @@ export class UserController {
         return this.userService.userList();
     }
 
+    // 用户信息
+    @Get('info')
+    @Redirect('/api/auth/test', 302)
+    async userInfo() {
+        return '用户信息';
+    }
+
     // 注册用户
     @Public()
     @Post('register')
@@ -34,8 +41,9 @@ export class UserController {
     @Public()
     @Post('login')
     @Redirect('/api/auth/login', 307)
-    async login() {
-        return 
+    async login(@Body() userDTO: UserDTO) {
+        const { username, password } = userDTO;
+        return this.userService.userLogin(username, password); 
     }
 
     // get 请求 301 永久重定向  302 临时重定向
