@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Question } from './question.schema'
+import { nanoid } from 'nanoid';
 
 
 @Injectable()
@@ -37,9 +38,20 @@ export class QuestionService {
     // 创建问卷
     async questionCreate(username: string) {
         const newQuestion = new this.questionModel({
-            title: "questionTitle" + Date.now(),
-            desc: "desc",
+            title: "问卷标题",
+            desc: "问卷描述",
             author: username,
+            componentList: [
+                {
+                    fe_id: nanoid(),
+                    type: "questionInfo",
+                    title: "问卷信息",
+                    props: { 
+                        title: '问卷标题',
+                        desc: '问卷描述',
+                    }
+                }
+            ]
         })
         return await newQuestion.save()
     }
