@@ -41,9 +41,9 @@ const PageStat: FC<PropsType> = (props: PropsType) => {
     {
       refreshDeps: [id, page, pageSize],
       onSuccess(res) {
-        const { total, List } = res
+        const { total, list = [] } = res
         setTotal(total)
-        setList(List)
+        setList(list)
       },
     }
   )

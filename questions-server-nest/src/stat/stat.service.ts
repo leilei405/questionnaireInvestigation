@@ -46,10 +46,11 @@ export class StatService {
         const { componentList = [] } = question;
 
         answerList.forEach((a) => {
-            const { componentId: componentFeId, value } = a;
+            const { questionId: componentFeId, value } = a;
 
             // 获取组件信息
             const comp = componentList.filter((c) => c.fe_id === componentFeId)[0];
+
             const { type, props = {} } = comp;
             if (type === 'questionRadio') {
                 // 单选
@@ -57,7 +58,7 @@ export class StatService {
                     .split(',')
                     .map((v) => this._getRadioOptText(v, props))
                     .toString();
-            } else if (type === 'questionCheckbox') {
+            } else if (type === 'questionCheckBox') {
                 // 多选
                 res[componentFeId] = value
                     .split(',')
@@ -76,27 +77,27 @@ export class StatService {
         questionId: string,
         opt: { page: number; pageSize: number 
     }) {
-        const noData = { list: [], count: 0 };
-        if (!questionId) return noData;
-
-        const question = await this.questionService.questionFindOne(questionId);
-        if (question == null) return noData
-
-        const total = await this.answerService.getAnswerCount(questionId);
-
-        const answerList = await this.answerService.getAnswers(questionId, opt);
-
-        const list = answerList.map((item) => {
-            return {
-                _id: item._id,
-                ...this._genAnswersInfo(question, item.answerList),
-            }
-        });
-
+      const noData = { list: [], count: 0 };
+      if (!questionId) return noData;
+      
+      const question = await this.questionService.questionFindOne(questionId);
+      if (question == null) return noData;
+  
+      const total = await this.answerService.getAnswerCount(questionId);
+      if (total === 0) return noData;
+  
+      const answers = await this.answerService.getAnswers(questionId, opt);
+      const list = answers.map((item) => {        
         return {
-            list,
-            total,
+          _id: item._id,
+          ...this._genAnswersInfo(question, item.answerList),
         };
+      });
+      
+      return {
+        list,
+        total,
+      };
     }
 
     // 获取单个组件的统计数据
@@ -113,7 +114,7 @@ export class StatService {
     if (comp == null) return [];
 
     const { type, props } = comp;
-    if (type !== 'questionRadio' && type !== 'questionCheckbox') {
+    if (type !== 'questionRadio' && type !== 'questionCheckBox') {
       // 单组件的，只统计单选和多选。其他不统计
       return [];
     }
@@ -121,6 +122,7 @@ export class StatService {
     // 获取答卷列表
     const total = await this.answerService.getAnswerCount(questionId);
     if (total === 0) return []; // 答卷总数量
+
     const answers = await this.answerService.getAnswers(questionId, {
       page: 1,
       pageSize: total, // 获取所有的，不分页
@@ -131,7 +133,7 @@ export class StatService {
     answers.forEach((a) => {
       const { answerList = [] } = a;
       answerList.forEach((a) => {
-        if (a.componentId !== componentFeId) return;
+        if (a.questionId !== componentFeId) return;
         a.value.split(',').forEach((v) => {
           if (countInfo[v] == null) countInfo[v] = 0;
           countInfo[v]++; // 累加

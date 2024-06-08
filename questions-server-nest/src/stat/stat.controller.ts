@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { StatService } from './stat.service';
 
 @Controller('stat')
@@ -10,12 +10,12 @@ export class StatController {
     @Get(':questionId')
     async getQuestionStat(
         @Param('questionId') questionId: string,
-        @Param('page') page: number = 1,
-        @Param('pageSize') pageSize: number = 10,
+        @Query('page') page: number = 1,
+        @Query('pageSize') pageSize: number = 10,
     ) {
-        return await this.statService.getQuestionStatListAndCount(questionId, {
-            page, pageSize
-        });
+      const res = await this.statService.getQuestionStatListAndCount(questionId, { page, pageSize });
+      return res;
+      
     }
 
     @Get(':questionId/:componentFeId')
@@ -27,6 +27,8 @@ export class StatController {
         questionId,
         componentFeId,
       );
+      console.log(stat);
+      
       return { stat };
     }
 }

@@ -27,7 +27,7 @@ const ChartStat: FC<PropsType> = (props: PropsType) => {
   const { run } = useRequest(
     async (questionId, componentId) => await getComponentStatService(questionId, componentId),
     {
-      manual: false, // true 手动触发
+      manual: true, // true 手动触发
       onSuccess(res) {
         setData(res.stat)
       },
@@ -36,7 +36,7 @@ const ChartStat: FC<PropsType> = (props: PropsType) => {
 
   useEffect(() => {
     if (selectedComponentId) run(id, selectedComponentId)
-  }, [selectedComponentId])
+  }, [id, selectedComponentId])
 
   // 生成统计图表
   function getStatElem() {
