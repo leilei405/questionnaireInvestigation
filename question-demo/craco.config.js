@@ -31,9 +31,9 @@ module.exports = {
     },
 
     // 别名配置
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+    // alias: {
+    //   '@': path.resolve(__dirname, './src'),
+    // },
   },
   devServer: {
     port: 8000, // / 端口号设置
