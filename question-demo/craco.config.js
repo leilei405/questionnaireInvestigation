@@ -29,11 +29,16 @@ module.exports = {
       }
       return webpackConfig
     },
+
+    // 别名配置
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   devServer: {
-    port: 8000, // B端
+    port: 8000, // / 端口号设置
     proxy: {
-      '/api': 'http://localhost:3001',
+      '/api': 'http://120.26.197.151/:3333', // 主机域名配置
     },
   },
 }
