@@ -49,9 +49,9 @@
     "build:pre": "cross-env NODE_ENV=production BASE_ENV=pre webpack -c config/webpack.prod.js",
     "build:prod": "cross-env NODE_ENV=production BASE_ENV=production webpack -c config/webpack.prod.js",
 
-    "start": "react-scripts start",
+    "start": "craco start",
     "test": "react-scripts test",
-    "b": "react-scripts build",
+    "builds": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": " eslint 'src/**/*.+(js|ts|jsx|tsx)' ",
     "format": " prettier --write 'src/**/*.+(js|ts|jsx|tsx)' ",
@@ -60,7 +60,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest"  
     ]
   },
   "browserslist": {
