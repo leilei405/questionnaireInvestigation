@@ -29,9 +29,7 @@ const MainLayout: FC = () => {
           <Outlet />
         )}
       </Content>
-      <Footer className={styles.footer}>
-        Amorous 问卷调查 在线问卷 &copy;2023 - author Amorous
-      </Footer>
+      <Footer className={styles.footer}>Lucky 在线问卷调查 &copy;陕ICP备2024041817号</Footer>
     </Layout>
   )
 }

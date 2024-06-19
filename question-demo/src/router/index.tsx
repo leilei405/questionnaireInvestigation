@@ -11,10 +11,10 @@ import Trash from '../pages/manage/Trash'
 import MainLayout from '../layouts/MainLayout'
 import ManageLayout from '../layouts/ManageLayout'
 import QuestionLayout from '../layouts/QuestionLayout'
-// import Edit from '../pages/question/Edit'
-// import Stat from '../pages/question/Stat'
-const Edit = lazy(() => import(/* webpackChunkName: "editPage" */ '../pages/question/Edit'))
-const Stat = lazy(() => import(/* webpackChunkName: "statPage" */ '../pages/question/Stat'))
+import Edit from '../pages/question/Edit'
+import Stat from '../pages/question/Stat'
+// const Edit = lazy(() => import(/* webpackChunkName: "editPage" */ '../pages/question/Edit'))
+// const Stat = lazy(() => import(/* webpackChunkName: "statPage" */ '../pages/question/Stat'))
 
 const router = createBrowserRouter([
   {

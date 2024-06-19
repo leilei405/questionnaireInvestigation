@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Space, Typography } from 'antd'
-import { FormOutlined } from '@ant-design/icons'
+import { EditTwoTone } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import styles from './Logo.module.scss'
 import { userGetUserInfo } from '../hooks/userGetUserInfo' // 自定义hook 获取用户信息
@@ -24,9 +24,9 @@ const Logo: FC = () => {
       <Link to={pathname}>
         <Space>
           <Title>
-            <FormOutlined />
+            <EditTwoTone />
           </Title>
-          <Title>Amorous 问卷</Title>
+          <Title>问卷调查</Title>
         </Space>
       </Link>
     </div>

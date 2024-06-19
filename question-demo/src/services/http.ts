@@ -4,7 +4,7 @@ import { message } from 'antd'
 import { getToken } from '../utils/rememberInfo'
 
 const instance = axios.create({
-  baseURL: 'http://116.62.229.96:3333/',
+  baseURL: 'http://www.lowcodedemo.top/',
   timeout: 10 * 1000,
   headers: {},
 })

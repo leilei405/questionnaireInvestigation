@@ -25,7 +25,7 @@ export const Login: FC = () => {
     },
     {
       manual: true,
-      onSuccess: result => {
+      onSuccess: async result => {
         const { token = '' } = result
         if (!token) {
           message.error('登录失败')
@@ -55,7 +55,6 @@ export const Login: FC = () => {
 
   useEffect(() => {
     const { username, password } = getUserInfoFormStorage()
-    console.log(username, password)
     form.setFieldsValue({ username, password })
   }, [])
 
