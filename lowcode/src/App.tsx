@@ -1,9 +1,9 @@
 import React from 'react'
-import Cascader from './page/Cascader'
+import QuestionCom from './page/question/question'
 function App() {
   return (
     <div className="App">
-      <Cascader />
+      <QuestionCom />
     </div>
   )
 }

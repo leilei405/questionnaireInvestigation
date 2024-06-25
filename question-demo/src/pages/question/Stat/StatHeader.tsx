@@ -30,7 +30,8 @@ const StatHeader: FC = () => {
   const GetLinkAndQRcode = useMemo(() => {
     if (!isPublished) return null
     // 拼接url 需要参考C端规则
-    const url = `http://localhost:8000/question/stat/${id}`
+    const url = `http://h5question.lowcodedemo.top/question/${id}`
+    // const url = `http://localhost:3000/question/${id}`
 
     // 定义二维码组件
     const QRCodeElem = () => {
